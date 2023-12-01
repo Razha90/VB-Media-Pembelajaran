@@ -34,3 +34,5 @@ C:\Perkuliahan\Semester 3\Pemproggraman Visual\Media Pembelajaran\Media Pembelaj
 C:\Perkuliahan\Semester 3\Pemproggraman Visual\Media Pembelajaran\Media Pembelajaran\Media Pembelajaran\obj\Debug\net8.0-windows\Media Pembelajaran.vbproj.AssemblyReference.cache
 C:\Perkuliahan\Semester 3\Pemproggraman Visual\Media Pembelajaran\Media Pembelajaran\Media Pembelajaran\obj\Debug\net8.0-windows\Media Pembelajaran.vbproj.CopyComplete
 C:\Perkuliahan\Semester 3\Pemproggraman Visual\Media Pembelajaran\Media Pembelajaran\Media Pembelajaran\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+C:\Perkuliahan\Semester 3\Pemproggraman Visual\Media Pembelajaran\Media Pembelajaran\Media Pembelajaran\obj\Debug\net8.0-windows\Media_Pembelajaran.Dashboard.resources
+C:\Perkuliahan\Semester 3\Pemproggraman Visual\Media Pembelajaran\Media Pembelajaran\Media Pembelajaran\obj\Debug\net8.0-windows\Media Pembelajaran.sourcelink.json

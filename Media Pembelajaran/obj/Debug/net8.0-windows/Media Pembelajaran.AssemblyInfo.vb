@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("Media Pembelajaran"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4179ad707708135c4fab8920dc7c154d1165e2c2"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("Media Pembelajaran"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("Media Pembelajaran"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _
