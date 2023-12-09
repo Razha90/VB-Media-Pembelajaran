@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Dashboard
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,24 +20,24 @@ Partial Class Dashboard
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         Panel1 = New Panel()
         Label1 = New Label()
-        FlowLayoutPanel1 = New FlowLayoutPanel()
+        Flow_Menu = New FlowLayoutPanel()
         Login = New Panel()
         Active_Login = New Button()
         Label_Login = New Label()
-        Icon_Login = New Button()
+        Panel2 = New Panel()
         Daftar = New Panel()
         Active_Daftar = New Button()
         Daftar_Label = New Label()
         Icon_Daftar = New Button()
         Database = New Panel()
+        Database_Icon = New Panel()
         Active_Database = New Button()
         Database_Label = New Label()
-        Icon_Database = New Button()
         Profile = New Panel()
         Active_Profile = New Button()
         Profile_Label = New Label()
@@ -57,19 +57,55 @@ Partial Class Dashboard
         Minimize_Button = New Button()
         Exit_Button = New Button()
         Database_Container = New Panel()
-        DC_Title = New Label()
-        DC_L_Server = New Label()
-        DC_L_Database = New Label()
-        DC_L_User = New Label()
+        TextBox_Data = New TextBox()
+        Connection_Save = New Button()
+        Connection_Test = New Button()
+        Text_Password = New TextBox()
+        Text_User = New TextBox()
+        Text_Server = New TextBox()
         DC_L_Password = New Label()
-        TextBox1 = New TextBox()
-        TextBox2 = New TextBox()
-        TextBox3 = New TextBox()
-        TextBox4 = New TextBox()
-        Button1 = New Button()
-        Button2 = New Button()
+        DC_L_User = New Label()
+        DC_L_Database = New Label()
+        DC_L_Server = New Label()
+        DC_Title = New Label()
+        Content_Display = New Panel()
+        Label2 = New Label()
+        Login_Container = New Panel()
+        Label11 = New Label()
+        Login_Button = New Button()
+        Login_Password = New TextBox()
+        Label10 = New Label()
+        Label9 = New Label()
+        Login_user = New TextBox()
+        Label8 = New Label()
+        Daftar_Container = New Panel()
+        Daftar_Button = New Button()
+        Label_Jawaban = New Label()
+        Daftar_Jawaban = New TextBox()
+        Label18 = New Label()
+        Label_Pertanyaan = New Label()
+        Daftar_Pertanyaan = New TextBox()
+        Label16 = New Label()
+        Daftar_RePassword = New TextBox()
+        Label15 = New Label()
+        Daftar_Username = New TextBox()
+        Label14 = New Label()
+        Daftar_Password = New TextBox()
+        Label13 = New Label()
+        Label12 = New Label()
+        Daftar_Email = New TextBox()
+        Daftar_Nama = New TextBox()
+        Label7 = New Label()
+        Profile_Container = New Panel()
+        Label6 = New Label()
+        Materi_Container = New Panel()
+        Label5 = New Label()
+        Latihan_Container = New Panel()
+        Label4 = New Label()
+        Murid_Container = New Panel()
+        Label3 = New Label()
         Panel1.SuspendLayout()
-        FlowLayoutPanel1.SuspendLayout()
+        Flow_Menu.SuspendLayout()
         Login.SuspendLayout()
         Daftar.SuspendLayout()
         Database.SuspendLayout()
@@ -78,13 +114,20 @@ Partial Class Dashboard
         Latihan.SuspendLayout()
         Murid.SuspendLayout()
         Database_Container.SuspendLayout()
+        Content_Display.SuspendLayout()
+        Login_Container.SuspendLayout()
+        Daftar_Container.SuspendLayout()
+        Profile_Container.SuspendLayout()
+        Materi_Container.SuspendLayout()
+        Latihan_Container.SuspendLayout()
+        Murid_Container.SuspendLayout()
         SuspendLayout()
         ' 
         ' Panel1
         ' 
         Panel1.BackColor = Color.IndianRed
         Panel1.Controls.Add(Label1)
-        Panel1.Controls.Add(FlowLayoutPanel1)
+        Panel1.Controls.Add(Flow_Menu)
         Panel1.Controls.Add(Minimize_Button)
         Panel1.Controls.Add(Exit_Button)
         Panel1.Dock = DockStyle.Left
@@ -96,7 +139,7 @@ Partial Class Dashboard
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 10F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = SystemColors.ButtonFace
         Label1.Location = New Point(9, 710)
         Label1.Name = "Label1"
@@ -104,25 +147,25 @@ Partial Class Dashboard
         Label1.TabIndex = 4
         Label1.Text = "V 1.0"
         ' 
-        ' FlowLayoutPanel1
+        ' Flow_Menu
         ' 
-        FlowLayoutPanel1.Controls.Add(Login)
-        FlowLayoutPanel1.Controls.Add(Daftar)
-        FlowLayoutPanel1.Controls.Add(Database)
-        FlowLayoutPanel1.Controls.Add(Profile)
-        FlowLayoutPanel1.Controls.Add(Materi)
-        FlowLayoutPanel1.Controls.Add(Latihan)
-        FlowLayoutPanel1.Controls.Add(Murid)
-        FlowLayoutPanel1.Location = New Point(0, 55)
-        FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        FlowLayoutPanel1.Size = New Size(223, 649)
-        FlowLayoutPanel1.TabIndex = 3
+        Flow_Menu.Controls.Add(Login)
+        Flow_Menu.Controls.Add(Daftar)
+        Flow_Menu.Controls.Add(Database)
+        Flow_Menu.Controls.Add(Profile)
+        Flow_Menu.Controls.Add(Materi)
+        Flow_Menu.Controls.Add(Latihan)
+        Flow_Menu.Controls.Add(Murid)
+        Flow_Menu.Location = New Point(0, 55)
+        Flow_Menu.Name = "Flow_Menu"
+        Flow_Menu.Size = New Size(223, 649)
+        Flow_Menu.TabIndex = 3
         ' 
         ' Login
         ' 
         Login.Controls.Add(Active_Login)
         Login.Controls.Add(Label_Login)
-        Login.Controls.Add(Icon_Login)
+        Login.Controls.Add(Panel2)
         Login.Location = New Point(3, 3)
         Login.Name = "Login"
         Login.Size = New Size(223, 50)
@@ -142,7 +185,7 @@ Partial Class Dashboard
         ' Label_Login
         ' 
         Label_Login.AutoSize = True
-        Label_Login.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label_Login.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label_Login.ForeColor = SystemColors.ControlLightLight
         Label_Login.Location = New Point(84, 9)
         Label_Login.Name = "Label_Login"
@@ -150,19 +193,15 @@ Partial Class Dashboard
         Label_Login.TabIndex = 1
         Label_Login.Text = "Masuk"
         ' 
-        ' Icon_Login
+        ' Panel2
         ' 
-        Icon_Login.BackColor = Color.Transparent
-        Icon_Login.BackgroundImage = My.Resources.Resources.Login
-        Icon_Login.BackgroundImageLayout = ImageLayout.Zoom
-        Icon_Login.FlatAppearance.BorderSize = 0
-        Icon_Login.FlatStyle = FlatStyle.Flat
-        Icon_Login.Location = New Point(41, 7)
-        Icon_Login.Margin = New Padding(0)
-        Icon_Login.Name = "Icon_Login"
-        Icon_Login.Size = New Size(49, 35)
-        Icon_Login.TabIndex = 0
-        Icon_Login.UseVisualStyleBackColor = False
+        Panel2.BackColor = Color.Transparent
+        Panel2.BackgroundImage = My.Resources.Resources.Login
+        Panel2.BackgroundImageLayout = ImageLayout.Zoom
+        Panel2.Location = New Point(34, 4)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(57, 41)
+        Panel2.TabIndex = 1
         ' 
         ' Daftar
         ' 
@@ -188,7 +227,7 @@ Partial Class Dashboard
         ' Daftar_Label
         ' 
         Daftar_Label.AutoSize = True
-        Daftar_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Daftar_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Daftar_Label.ForeColor = SystemColors.ControlLightLight
         Daftar_Label.Location = New Point(84, 9)
         Daftar_Label.Name = "Daftar_Label"
@@ -212,13 +251,23 @@ Partial Class Dashboard
         ' 
         ' Database
         ' 
+        Database.Controls.Add(Database_Icon)
         Database.Controls.Add(Active_Database)
         Database.Controls.Add(Database_Label)
-        Database.Controls.Add(Icon_Database)
         Database.Location = New Point(3, 115)
         Database.Name = "Database"
         Database.Size = New Size(223, 50)
         Database.TabIndex = 3
+        ' 
+        ' Database_Icon
+        ' 
+        Database_Icon.BackColor = Color.Transparent
+        Database_Icon.BackgroundImage = My.Resources.Resources.Database
+        Database_Icon.BackgroundImageLayout = ImageLayout.Zoom
+        Database_Icon.Location = New Point(38, 6)
+        Database_Icon.Name = "Database_Icon"
+        Database_Icon.Size = New Size(50, 38)
+        Database_Icon.TabIndex = 2
         ' 
         ' Active_Database
         ' 
@@ -234,27 +283,13 @@ Partial Class Dashboard
         ' Database_Label
         ' 
         Database_Label.AutoSize = True
-        Database_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Database_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Database_Label.ForeColor = SystemColors.ControlLightLight
         Database_Label.Location = New Point(84, 9)
         Database_Label.Name = "Database_Label"
         Database_Label.Size = New Size(112, 30)
         Database_Label.TabIndex = 1
         Database_Label.Text = "Database"
-        ' 
-        ' Icon_Database
-        ' 
-        Icon_Database.BackColor = Color.Transparent
-        Icon_Database.BackgroundImage = My.Resources.Resources.Database
-        Icon_Database.BackgroundImageLayout = ImageLayout.Zoom
-        Icon_Database.FlatAppearance.BorderSize = 0
-        Icon_Database.FlatStyle = FlatStyle.Flat
-        Icon_Database.Location = New Point(41, 7)
-        Icon_Database.Margin = New Padding(0)
-        Icon_Database.Name = "Icon_Database"
-        Icon_Database.Size = New Size(49, 35)
-        Icon_Database.TabIndex = 0
-        Icon_Database.UseVisualStyleBackColor = False
         ' 
         ' Profile
         ' 
@@ -280,7 +315,7 @@ Partial Class Dashboard
         ' Profile_Label
         ' 
         Profile_Label.AutoSize = True
-        Profile_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Profile_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Profile_Label.ForeColor = SystemColors.ControlLightLight
         Profile_Label.Location = New Point(84, 9)
         Profile_Label.Name = "Profile_Label"
@@ -326,7 +361,7 @@ Partial Class Dashboard
         ' Materi_Label
         ' 
         Materi_Label.AutoSize = True
-        Materi_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Materi_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Materi_Label.ForeColor = SystemColors.ControlLightLight
         Materi_Label.Location = New Point(84, 9)
         Materi_Label.Name = "Materi_Label"
@@ -372,7 +407,7 @@ Partial Class Dashboard
         ' Latihan_Label
         ' 
         Latihan_Label.AutoSize = True
-        Latihan_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Latihan_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Latihan_Label.ForeColor = SystemColors.ControlLightLight
         Latihan_Label.Location = New Point(84, 9)
         Latihan_Label.Name = "Latihan_Label"
@@ -418,7 +453,7 @@ Partial Class Dashboard
         ' Murid_Label
         ' 
         Murid_Label.AutoSize = True
-        Murid_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Murid_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Murid_Label.ForeColor = SystemColors.ControlLightLight
         Murid_Label.Location = New Point(84, 9)
         Murid_Label.Name = "Murid_Label"
@@ -447,7 +482,7 @@ Partial Class Dashboard
         Minimize_Button.Cursor = Cursors.Hand
         Minimize_Button.FlatAppearance.BorderSize = 0
         Minimize_Button.FlatStyle = FlatStyle.Flat
-        Minimize_Button.Font = New Font("Impact", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Minimize_Button.Font = New Font("Impact", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Minimize_Button.ForeColor = SystemColors.ButtonFace
         Minimize_Button.Location = New Point(44, 4)
         Minimize_Button.Margin = New Padding(0)
@@ -464,7 +499,7 @@ Partial Class Dashboard
         Exit_Button.Cursor = Cursors.Hand
         Exit_Button.FlatAppearance.BorderSize = 0
         Exit_Button.FlatStyle = FlatStyle.Flat
-        Exit_Button.Font = New Font("Impact", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Exit_Button.Font = New Font("Impact", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Exit_Button.ForeColor = SystemColors.ButtonFace
         Exit_Button.Location = New Point(11, 2)
         Exit_Button.Margin = New Padding(0)
@@ -476,12 +511,12 @@ Partial Class Dashboard
         ' 
         ' Database_Container
         ' 
-        Database_Container.Controls.Add(Button2)
-        Database_Container.Controls.Add(Button1)
-        Database_Container.Controls.Add(TextBox4)
-        Database_Container.Controls.Add(TextBox3)
-        Database_Container.Controls.Add(TextBox2)
-        Database_Container.Controls.Add(TextBox1)
+        Database_Container.Controls.Add(TextBox_Data)
+        Database_Container.Controls.Add(Connection_Save)
+        Database_Container.Controls.Add(Connection_Test)
+        Database_Container.Controls.Add(Text_Password)
+        Database_Container.Controls.Add(Text_User)
+        Database_Container.Controls.Add(Text_Server)
         Database_Container.Controls.Add(DC_L_Password)
         Database_Container.Controls.Add(DC_L_User)
         Database_Container.Controls.Add(DC_L_Database)
@@ -493,42 +528,51 @@ Partial Class Dashboard
         Database_Container.Size = New Size(865, 744)
         Database_Container.TabIndex = 1
         ' 
-        ' DC_Title
+        ' TextBox_Data
         ' 
-        DC_Title.AutoSize = True
-        DC_Title.Font = New Font("Lucida Bright", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        DC_Title.Location = New Point(60, 43)
-        DC_Title.Name = "DC_Title"
-        DC_Title.Size = New Size(460, 42)
-        DC_Title.TabIndex = 0
-        DC_Title.Text = "Connection To Database"
+        TextBox_Data.Location = New Point(172, 164)
+        TextBox_Data.Name = "TextBox_Data"
+        TextBox_Data.Size = New Size(622, 31)
+        TextBox_Data.TabIndex = 6
         ' 
-        ' DC_L_Server
+        ' Connection_Save
         ' 
-        DC_L_Server.AutoSize = True
-        DC_L_Server.Location = New Point(72, 123)
-        DC_L_Server.Name = "DC_L_Server"
-        DC_L_Server.Size = New Size(70, 25)
-        DC_L_Server.TabIndex = 1
-        DC_L_Server.Text = "Server :"
+        Connection_Save.Location = New Point(327, 347)
+        Connection_Save.Name = "Connection_Save"
+        Connection_Save.Size = New Size(193, 44)
+        Connection_Save.TabIndex = 10
+        Connection_Save.Text = "Save Connection"
+        Connection_Save.UseVisualStyleBackColor = True
         ' 
-        ' DC_L_Database
+        ' Connection_Test
         ' 
-        DC_L_Database.AutoSize = True
-        DC_L_Database.Location = New Point(72, 170)
-        DC_L_Database.Name = "DC_L_Database"
-        DC_L_Database.Size = New Size(95, 25)
-        DC_L_Database.TabIndex = 2
-        DC_L_Database.Text = "Database :"
+        Connection_Test.Location = New Point(682, 311)
+        Connection_Test.Name = "Connection_Test"
+        Connection_Test.Size = New Size(112, 34)
+        Connection_Test.TabIndex = 9
+        Connection_Test.Text = "Test"
+        Connection_Test.UseVisualStyleBackColor = True
         ' 
-        ' DC_L_User
+        ' Text_Password
         ' 
-        DC_L_User.AutoSize = True
-        DC_L_User.Location = New Point(72, 212)
-        DC_L_User.Name = "DC_L_User"
-        DC_L_User.Size = New Size(56, 25)
-        DC_L_User.TabIndex = 3
-        DC_L_User.Text = "User :"
+        Text_Password.Location = New Point(172, 251)
+        Text_Password.Name = "Text_Password"
+        Text_Password.Size = New Size(622, 31)
+        Text_Password.TabIndex = 8
+        ' 
+        ' Text_User
+        ' 
+        Text_User.Location = New Point(172, 212)
+        Text_User.Name = "Text_User"
+        Text_User.Size = New Size(622, 31)
+        Text_User.TabIndex = 7
+        ' 
+        ' Text_Server
+        ' 
+        Text_Server.Location = New Point(172, 122)
+        Text_Server.Name = "Text_Server"
+        Text_Server.Size = New Size(622, 31)
+        Text_Server.TabIndex = 5
         ' 
         ' DC_L_Password
         ' 
@@ -539,58 +583,413 @@ Partial Class Dashboard
         DC_L_Password.TabIndex = 4
         DC_L_Password.Text = "Password :"
         ' 
-        ' TextBox1
+        ' DC_L_User
         ' 
-        TextBox1.Location = New Point(172, 122)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(622, 31)
-        TextBox1.TabIndex = 5
+        DC_L_User.AutoSize = True
+        DC_L_User.Location = New Point(72, 212)
+        DC_L_User.Name = "DC_L_User"
+        DC_L_User.Size = New Size(56, 25)
+        DC_L_User.TabIndex = 3
+        DC_L_User.Text = "User :"
         ' 
-        ' TextBox2
+        ' DC_L_Database
         ' 
-        TextBox2.Location = New Point(173, 170)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(622, 31)
-        TextBox2.TabIndex = 6
+        DC_L_Database.AutoSize = True
+        DC_L_Database.Location = New Point(72, 170)
+        DC_L_Database.Name = "DC_L_Database"
+        DC_L_Database.Size = New Size(95, 25)
+        DC_L_Database.TabIndex = 2
+        DC_L_Database.Text = "Database :"
         ' 
-        ' TextBox3
+        ' DC_L_Server
         ' 
-        TextBox3.Location = New Point(172, 212)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(622, 31)
-        TextBox3.TabIndex = 7
+        DC_L_Server.AutoSize = True
+        DC_L_Server.Location = New Point(72, 123)
+        DC_L_Server.Name = "DC_L_Server"
+        DC_L_Server.Size = New Size(70, 25)
+        DC_L_Server.TabIndex = 1
+        DC_L_Server.Text = "Server :"
         ' 
-        ' TextBox4
+        ' DC_Title
         ' 
-        TextBox4.Location = New Point(172, 251)
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(622, 31)
-        TextBox4.TabIndex = 8
+        DC_Title.AutoSize = True
+        DC_Title.Font = New Font("Lucida Bright", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        DC_Title.Location = New Point(60, 43)
+        DC_Title.Name = "DC_Title"
+        DC_Title.Size = New Size(460, 42)
+        DC_Title.TabIndex = 0
+        DC_Title.Text = "Connection To Database"
         ' 
-        ' Button1
+        ' Content_Display
         ' 
-        Button1.Location = New Point(682, 311)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(112, 34)
-        Button1.TabIndex = 9
-        Button1.Text = "Test"
-        Button1.UseVisualStyleBackColor = True
+        Content_Display.Controls.Add(Label2)
+        Content_Display.Dock = DockStyle.Fill
+        Content_Display.Location = New Point(223, 0)
+        Content_Display.Name = "Content_Display"
+        Content_Display.Size = New Size(865, 744)
+        Content_Display.TabIndex = 11
         ' 
-        ' Button2
+        ' Label2
         ' 
-        Button2.Location = New Point(376, 333)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(144, 44)
-        Button2.TabIndex = 10
-        Button2.Text = "Save"
-        Button2.UseVisualStyleBackColor = True
+        Label2.AutoSize = True
+        Label2.Location = New Point(261, 70)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(63, 25)
+        Label2.TabIndex = 0
+        Label2.Text = "Label2"
+        ' 
+        ' Login_Container
+        ' 
+        Login_Container.Controls.Add(Label11)
+        Login_Container.Controls.Add(Login_Button)
+        Login_Container.Controls.Add(Login_Password)
+        Login_Container.Controls.Add(Label10)
+        Login_Container.Controls.Add(Label9)
+        Login_Container.Controls.Add(Login_user)
+        Login_Container.Controls.Add(Label8)
+        Login_Container.Dock = DockStyle.Fill
+        Login_Container.Location = New Point(223, 0)
+        Login_Container.Name = "Login_Container"
+        Login_Container.Size = New Size(865, 744)
+        Login_Container.TabIndex = 11
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Segoe UI", 6.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label11.ForeColor = Color.DodgerBlue
+        Label11.Location = New Point(507, 324)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(87, 15)
+        Label11.TabIndex = 7
+        Label11.Text = "Lupa Pasword?"
+        ' 
+        ' Login_Button
+        ' 
+        Login_Button.Location = New Point(378, 369)
+        Login_Button.Name = "Login_Button"
+        Login_Button.Size = New Size(112, 34)
+        Login_Button.TabIndex = 6
+        Login_Button.Text = "Login"
+        Login_Button.UseVisualStyleBackColor = True
+        ' 
+        ' Login_Password
+        ' 
+        Login_Password.Location = New Point(288, 285)
+        Login_Password.Name = "Login_Password"
+        Login_Password.PasswordChar = "*"c
+        Login_Password.Size = New Size(306, 31)
+        Login_Password.TabIndex = 5
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Location = New Point(288, 254)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(87, 25)
+        Label10.TabIndex = 4
+        Label10.Text = "Password"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Location = New Point(283, 173)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(160, 25)
+        Label9.TabIndex = 3
+        Label9.Text = "Email or Username"
+        ' 
+        ' Login_user
+        ' 
+        Login_user.Location = New Point(286, 201)
+        Login_user.Name = "Login_user"
+        Login_user.Size = New Size(308, 31)
+        Login_user.TabIndex = 2
+        ' 
+        ' Label8
+        ' 
+        Label8.AutoSize = True
+        Label8.Font = New Font("Segoe UI Historic", 16.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label8.Location = New Point(299, 74)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(279, 45)
+        Label8.TabIndex = 1
+        Label8.Text = "Login HomePage"
+        ' 
+        ' Daftar_Container
+        ' 
+        Daftar_Container.Controls.Add(Daftar_Button)
+        Daftar_Container.Controls.Add(Label_Jawaban)
+        Daftar_Container.Controls.Add(Daftar_Jawaban)
+        Daftar_Container.Controls.Add(Label18)
+        Daftar_Container.Controls.Add(Label_Pertanyaan)
+        Daftar_Container.Controls.Add(Daftar_Pertanyaan)
+        Daftar_Container.Controls.Add(Label16)
+        Daftar_Container.Controls.Add(Daftar_RePassword)
+        Daftar_Container.Controls.Add(Label15)
+        Daftar_Container.Controls.Add(Daftar_Username)
+        Daftar_Container.Controls.Add(Label14)
+        Daftar_Container.Controls.Add(Daftar_Password)
+        Daftar_Container.Controls.Add(Label13)
+        Daftar_Container.Controls.Add(Label12)
+        Daftar_Container.Controls.Add(Daftar_Email)
+        Daftar_Container.Controls.Add(Daftar_Nama)
+        Daftar_Container.Controls.Add(Label7)
+        Daftar_Container.Dock = DockStyle.Fill
+        Daftar_Container.Location = New Point(223, 0)
+        Daftar_Container.Name = "Daftar_Container"
+        Daftar_Container.Size = New Size(865, 744)
+        Daftar_Container.TabIndex = 0
+        ' 
+        ' Daftar_Button
+        ' 
+        Daftar_Button.BackColor = SystemColors.ActiveCaptionText
+        Daftar_Button.Font = New Font("Arial Narrow", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Daftar_Button.ForeColor = Color.Transparent
+        Daftar_Button.Location = New Point(327, 628)
+        Daftar_Button.Name = "Daftar_Button"
+        Daftar_Button.Size = New Size(202, 53)
+        Daftar_Button.TabIndex = 9
+        Daftar_Button.Text = "Daftar Akun"
+        Daftar_Button.UseVisualStyleBackColor = False
+        ' 
+        ' Label_Jawaban
+        ' 
+        Label_Jawaban.AutoSize = True
+        Label_Jawaban.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label_Jawaban.Location = New Point(45, 495)
+        Label_Jawaban.Name = "Label_Jawaban"
+        Label_Jawaban.Size = New Size(73, 21)
+        Label_Jawaban.TabIndex = 16
+        Label_Jawaban.Text = "Jawaban"
+        ' 
+        ' Daftar_Jawaban
+        ' 
+        Daftar_Jawaban.BorderStyle = BorderStyle.FixedSingle
+        Daftar_Jawaban.Location = New Point(49, 521)
+        Daftar_Jawaban.Multiline = True
+        Daftar_Jawaban.Name = "Daftar_Jawaban"
+        Daftar_Jawaban.Size = New Size(736, 76)
+        Daftar_Jawaban.TabIndex = 8
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label18.ForeColor = Color.FromArgb(CByte(255), CByte(128), CByte(128))
+        Label18.Location = New Point(45, 355)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(671, 21)
+        Label18.TabIndex = 14
+        Label18.Text = "Form dibawah berfungsi sebagai penangganan ketika anda lupa password harap diperhatikan"
+        ' 
+        ' Label_Pertanyaan
+        ' 
+        Label_Pertanyaan.AutoSize = True
+        Label_Pertanyaan.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label_Pertanyaan.Location = New Point(45, 377)
+        Label_Pertanyaan.Name = "Label_Pertanyaan"
+        Label_Pertanyaan.Size = New Size(91, 21)
+        Label_Pertanyaan.TabIndex = 13
+        Label_Pertanyaan.Text = "Pertanyaan"
+        ' 
+        ' Daftar_Pertanyaan
+        ' 
+        Daftar_Pertanyaan.BorderStyle = BorderStyle.FixedSingle
+        Daftar_Pertanyaan.Location = New Point(49, 403)
+        Daftar_Pertanyaan.Multiline = True
+        Daftar_Pertanyaan.Name = "Daftar_Pertanyaan"
+        Daftar_Pertanyaan.Size = New Size(736, 73)
+        Daftar_Pertanyaan.TabIndex = 7
+        ' 
+        ' Label16
+        ' 
+        Label16.AutoSize = True
+        Label16.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label16.Location = New Point(449, 198)
+        Label16.Name = "Label16"
+        Label16.Size = New Size(118, 21)
+        Label16.TabIndex = 11
+        Label16.Text = "Reply Password"
+        ' 
+        ' Daftar_RePassword
+        ' 
+        Daftar_RePassword.BorderStyle = BorderStyle.FixedSingle
+        Daftar_RePassword.Location = New Point(451, 221)
+        Daftar_RePassword.Name = "Daftar_RePassword"
+        Daftar_RePassword.Size = New Size(336, 31)
+        Daftar_RePassword.TabIndex = 6
+        Daftar_RePassword.UseSystemPasswordChar = True
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label15.Location = New Point(37, 271)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(81, 21)
+        Label15.TabIndex = 9
+        Label15.Text = "Username"
+        ' 
+        ' Daftar_Username
+        ' 
+        Daftar_Username.BorderStyle = BorderStyle.FixedSingle
+        Daftar_Username.Location = New Point(39, 294)
+        Daftar_Username.Name = "Daftar_Username"
+        Daftar_Username.Size = New Size(336, 31)
+        Daftar_Username.TabIndex = 4
+        ' 
+        ' Label14
+        ' 
+        Label14.AutoSize = True
+        Label14.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label14.Location = New Point(447, 117)
+        Label14.Name = "Label14"
+        Label14.Size = New Size(76, 21)
+        Label14.TabIndex = 7
+        Label14.Text = "Password"
+        ' 
+        ' Daftar_Password
+        ' 
+        Daftar_Password.BorderStyle = BorderStyle.FixedSingle
+        Daftar_Password.Location = New Point(449, 140)
+        Daftar_Password.Name = "Daftar_Password"
+        Daftar_Password.Size = New Size(336, 31)
+        Daftar_Password.TabIndex = 5
+        Daftar_Password.UseSystemPasswordChar = True
+        ' 
+        ' Label13
+        ' 
+        Label13.AutoSize = True
+        Label13.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label13.Location = New Point(37, 191)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(49, 21)
+        Label13.TabIndex = 5
+        Label13.Text = "Email"
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label12.Location = New Point(33, 114)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(54, 21)
+        Label12.TabIndex = 4
+        Label12.Text = "Nama"
+        ' 
+        ' Daftar_Email
+        ' 
+        Daftar_Email.BorderStyle = BorderStyle.FixedSingle
+        Daftar_Email.Location = New Point(39, 214)
+        Daftar_Email.Name = "Daftar_Email"
+        Daftar_Email.Size = New Size(336, 31)
+        Daftar_Email.TabIndex = 3
+        Daftar_Email.Text = "contoh.email@email.com"
+        ' 
+        ' Daftar_Nama
+        ' 
+        Daftar_Nama.BorderStyle = BorderStyle.FixedSingle
+        Daftar_Nama.Location = New Point(37, 140)
+        Daftar_Nama.Name = "Daftar_Nama"
+        Daftar_Nama.Size = New Size(338, 31)
+        Daftar_Nama.TabIndex = 2
+        ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.Font = New Font("Sylfaen", 22.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Location = New Point(247, 43)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(368, 58)
+        Label7.TabIndex = 1
+        Label7.Text = "Daftar Akun Baru"
+        ' 
+        ' Profile_Container
+        ' 
+        Profile_Container.Controls.Add(Label6)
+        Profile_Container.Dock = DockStyle.Fill
+        Profile_Container.Location = New Point(223, 0)
+        Profile_Container.Name = "Profile_Container"
+        Profile_Container.Size = New Size(865, 744)
+        Profile_Container.TabIndex = 0
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Location = New Point(403, 360)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(62, 25)
+        Label6.TabIndex = 1
+        Label6.Text = "Profile"
+        ' 
+        ' Materi_Container
+        ' 
+        Materi_Container.Controls.Add(Label5)
+        Materi_Container.Dock = DockStyle.Fill
+        Materi_Container.Location = New Point(223, 0)
+        Materi_Container.Name = "Materi_Container"
+        Materi_Container.Size = New Size(865, 744)
+        Materi_Container.TabIndex = 0
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Location = New Point(403, 360)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(62, 25)
+        Label5.TabIndex = 1
+        Label5.Text = "Materi"
+        ' 
+        ' Latihan_Container
+        ' 
+        Latihan_Container.Controls.Add(Label4)
+        Latihan_Container.Dock = DockStyle.Fill
+        Latihan_Container.Location = New Point(223, 0)
+        Latihan_Container.Name = "Latihan_Container"
+        Latihan_Container.Size = New Size(865, 744)
+        Latihan_Container.TabIndex = 0
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Location = New Point(403, 360)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(68, 25)
+        Label4.TabIndex = 1
+        Label4.Text = "Latihan"
+        ' 
+        ' Murid_Container
+        ' 
+        Murid_Container.Controls.Add(Label3)
+        Murid_Container.Dock = DockStyle.Fill
+        Murid_Container.Location = New Point(223, 0)
+        Murid_Container.Name = "Murid_Container"
+        Murid_Container.Size = New Size(865, 744)
+        Murid_Container.TabIndex = 0
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Location = New Point(119, 74)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(59, 25)
+        Label3.TabIndex = 0
+        Label3.Text = "Murid"
         ' 
         ' Dashboard
         ' 
-        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1088, 744)
+        Controls.Add(Login_Container)
         Controls.Add(Database_Container)
+        Controls.Add(Daftar_Container)
+        Controls.Add(Profile_Container)
+        Controls.Add(Materi_Container)
+        Controls.Add(Latihan_Container)
+        Controls.Add(Murid_Container)
+        Controls.Add(Content_Display)
         Controls.Add(Panel1)
         FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
@@ -599,7 +998,7 @@ Partial Class Dashboard
         Text = "MePa"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
-        FlowLayoutPanel1.ResumeLayout(False)
+        Flow_Menu.ResumeLayout(False)
         Login.ResumeLayout(False)
         Login.PerformLayout()
         Daftar.ResumeLayout(False)
@@ -616,6 +1015,20 @@ Partial Class Dashboard
         Murid.PerformLayout()
         Database_Container.ResumeLayout(False)
         Database_Container.PerformLayout()
+        Content_Display.ResumeLayout(False)
+        Content_Display.PerformLayout()
+        Login_Container.ResumeLayout(False)
+        Login_Container.PerformLayout()
+        Daftar_Container.ResumeLayout(False)
+        Daftar_Container.PerformLayout()
+        Profile_Container.ResumeLayout(False)
+        Profile_Container.PerformLayout()
+        Materi_Container.ResumeLayout(False)
+        Materi_Container.PerformLayout()
+        Latihan_Container.ResumeLayout(False)
+        Latihan_Container.PerformLayout()
+        Murid_Container.ResumeLayout(False)
+        Murid_Container.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -623,9 +1036,8 @@ Partial Class Dashboard
     Friend WithEvents Exit_Button As Button
     Friend WithEvents Minimize_Button As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents Flow_Menu As FlowLayoutPanel
     Friend WithEvents Login As Panel
-    Friend WithEvents Icon_Login As Button
     Friend WithEvents Label_Login As Label
     Friend WithEvents Daftar As Panel
     Friend WithEvents Active_Daftar As Button
@@ -635,7 +1047,6 @@ Partial Class Dashboard
     Friend WithEvents Database As Panel
     Friend WithEvents Active_Database As Button
     Friend WithEvents Database_Label As Label
-    Friend WithEvents Icon_Database As Button
     Friend WithEvents Profile As Panel
     Friend WithEvents Active_Profile As Button
     Friend WithEvents Profile_Label As Label
@@ -658,10 +1069,48 @@ Partial Class Dashboard
     Friend WithEvents DC_L_Database As Label
     Friend WithEvents DC_L_Server As Label
     Friend WithEvents DC_Title As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Connection_Save As Button
+    Friend WithEvents Connection_Test As Button
+    Friend WithEvents Text_Password As TextBox
+    Friend WithEvents Text_User As TextBox
+    Friend WithEvents Text_Server As TextBox
+    Friend WithEvents Content_Display As Panel
+    Friend WithEvents TextBox_Data As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Database_Icon As Panel
+    Friend WithEvents Login_Container As Panel
+    Friend WithEvents Daftar_Container As Panel
+    Friend WithEvents Profile_Container As Panel
+    Friend WithEvents Materi_Container As Panel
+    Friend WithEvents Latihan_Container As Panel
+    Friend WithEvents Murid_Container As Panel
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Login_user As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Login_Password As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Login_Button As Button
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Daftar_Email As TextBox
+    Friend WithEvents Daftar_Nama As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Daftar_Username As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Daftar_Password As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Daftar_RePassword As TextBox
+    Friend WithEvents Label_Pertanyaan As Label
+    Friend WithEvents Daftar_Pertanyaan As TextBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Daftar_Button As Button
+    Friend WithEvents Label_Jawaban As Label
+    Friend WithEvents Daftar_Jawaban As TextBox
 End Class
