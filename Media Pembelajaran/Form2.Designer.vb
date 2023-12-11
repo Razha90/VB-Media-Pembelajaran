@@ -57,6 +57,8 @@ Partial Class Dashboard
         Minimize_Button = New Button()
         Exit_Button = New Button()
         Database_Container = New Panel()
+        Label17 = New Label()
+        Text_Port = New TextBox()
         TextBox_Data = New TextBox()
         Connection_Save = New Button()
         Connection_Test = New Button()
@@ -97,13 +99,39 @@ Partial Class Dashboard
         Daftar_Nama = New TextBox()
         Label7 = New Label()
         Profile_Container = New Panel()
-        Label6 = New Label()
         Materi_Container = New Panel()
+        materi_hapus = New Button()
+        materi_isi = New Button()
+        materi_tambah = New Button()
+        materi_insert = New TextBox()
+        materi_update = New Button()
         Label5 = New Label()
+        materi_getdata = New Button()
+        dgMateri = New DataGridView()
         Latihan_Container = New Panel()
         Label4 = New Label()
         Murid_Container = New Panel()
         Label3 = New Label()
+        materi_container_isi = New Panel()
+        materi_isi_hapus = New Button()
+        mater_isi_tam = New Button()
+        materi_list = New ComboBox()
+        materi_judul_but = New Button()
+        Panel3 = New Panel()
+        Label23 = New Label()
+        materi_page = New NumericUpDown()
+        Label22 = New Label()
+        materi_isi_video = New TextBox()
+        Label21 = New Label()
+        materi_isi_judul = New TextBox()
+        Label20 = New Label()
+        materi_isi_isi = New TextBox()
+        materi_isi_per = New Button()
+        materi_isi_tem = New Button()
+        dgIsiMateri = New DataGridView()
+        Label19 = New Label()
+        Label6 = New Label()
+        profile_gopage = New Button()
         Panel1.SuspendLayout()
         Flow_Menu.SuspendLayout()
         Login.SuspendLayout()
@@ -119,8 +147,13 @@ Partial Class Dashboard
         Daftar_Container.SuspendLayout()
         Profile_Container.SuspendLayout()
         Materi_Container.SuspendLayout()
+        CType(dgMateri, ComponentModel.ISupportInitialize).BeginInit()
         Latihan_Container.SuspendLayout()
         Murid_Container.SuspendLayout()
+        materi_container_isi.SuspendLayout()
+        Panel3.SuspendLayout()
+        CType(materi_page, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgIsiMateri, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Panel1
@@ -139,7 +172,7 @@ Partial Class Dashboard
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 10.0F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label1.Font = New Font("Segoe UI", 10F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = SystemColors.ButtonFace
         Label1.Location = New Point(9, 710)
         Label1.Name = "Label1"
@@ -185,7 +218,7 @@ Partial Class Dashboard
         ' Label_Login
         ' 
         Label_Login.AutoSize = True
-        Label_Login.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label_Login.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label_Login.ForeColor = SystemColors.ControlLightLight
         Label_Login.Location = New Point(84, 9)
         Label_Login.Name = "Label_Login"
@@ -227,7 +260,7 @@ Partial Class Dashboard
         ' Daftar_Label
         ' 
         Daftar_Label.AutoSize = True
-        Daftar_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Daftar_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Daftar_Label.ForeColor = SystemColors.ControlLightLight
         Daftar_Label.Location = New Point(84, 9)
         Daftar_Label.Name = "Daftar_Label"
@@ -283,7 +316,7 @@ Partial Class Dashboard
         ' Database_Label
         ' 
         Database_Label.AutoSize = True
-        Database_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Database_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Database_Label.ForeColor = SystemColors.ControlLightLight
         Database_Label.Location = New Point(84, 9)
         Database_Label.Name = "Database_Label"
@@ -315,7 +348,7 @@ Partial Class Dashboard
         ' Profile_Label
         ' 
         Profile_Label.AutoSize = True
-        Profile_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Profile_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Profile_Label.ForeColor = SystemColors.ControlLightLight
         Profile_Label.Location = New Point(84, 9)
         Profile_Label.Name = "Profile_Label"
@@ -361,7 +394,7 @@ Partial Class Dashboard
         ' Materi_Label
         ' 
         Materi_Label.AutoSize = True
-        Materi_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Materi_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Materi_Label.ForeColor = SystemColors.ControlLightLight
         Materi_Label.Location = New Point(84, 9)
         Materi_Label.Name = "Materi_Label"
@@ -407,7 +440,7 @@ Partial Class Dashboard
         ' Latihan_Label
         ' 
         Latihan_Label.AutoSize = True
-        Latihan_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Latihan_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Latihan_Label.ForeColor = SystemColors.ControlLightLight
         Latihan_Label.Location = New Point(84, 9)
         Latihan_Label.Name = "Latihan_Label"
@@ -453,7 +486,7 @@ Partial Class Dashboard
         ' Murid_Label
         ' 
         Murid_Label.AutoSize = True
-        Murid_Label.Font = New Font("Segoe UI Black", 11.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Murid_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Murid_Label.ForeColor = SystemColors.ControlLightLight
         Murid_Label.Location = New Point(84, 9)
         Murid_Label.Name = "Murid_Label"
@@ -482,7 +515,7 @@ Partial Class Dashboard
         Minimize_Button.Cursor = Cursors.Hand
         Minimize_Button.FlatAppearance.BorderSize = 0
         Minimize_Button.FlatStyle = FlatStyle.Flat
-        Minimize_Button.Font = New Font("Impact", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Minimize_Button.Font = New Font("Impact", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Minimize_Button.ForeColor = SystemColors.ButtonFace
         Minimize_Button.Location = New Point(44, 4)
         Minimize_Button.Margin = New Padding(0)
@@ -499,7 +532,7 @@ Partial Class Dashboard
         Exit_Button.Cursor = Cursors.Hand
         Exit_Button.FlatAppearance.BorderSize = 0
         Exit_Button.FlatStyle = FlatStyle.Flat
-        Exit_Button.Font = New Font("Impact", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Exit_Button.Font = New Font("Impact", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Exit_Button.ForeColor = SystemColors.ButtonFace
         Exit_Button.Location = New Point(11, 2)
         Exit_Button.Margin = New Padding(0)
@@ -511,6 +544,8 @@ Partial Class Dashboard
         ' 
         ' Database_Container
         ' 
+        Database_Container.Controls.Add(Label17)
+        Database_Container.Controls.Add(Text_Port)
         Database_Container.Controls.Add(TextBox_Data)
         Database_Container.Controls.Add(Connection_Save)
         Database_Container.Controls.Add(Connection_Test)
@@ -528,44 +563,60 @@ Partial Class Dashboard
         Database_Container.Size = New Size(865, 744)
         Database_Container.TabIndex = 1
         ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.Location = New Point(74, 170)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(53, 25)
+        Label17.TabIndex = 12
+        Label17.Text = "Port :"
+        ' 
+        ' Text_Port
+        ' 
+        Text_Port.Location = New Point(172, 167)
+        Text_Port.Name = "Text_Port"
+        Text_Port.Size = New Size(622, 31)
+        Text_Port.TabIndex = 6
+        ' 
         ' TextBox_Data
         ' 
-        TextBox_Data.Location = New Point(172, 164)
+        TextBox_Data.Location = New Point(172, 213)
         TextBox_Data.Name = "TextBox_Data"
         TextBox_Data.Size = New Size(622, 31)
-        TextBox_Data.TabIndex = 6
+        TextBox_Data.TabIndex = 7
         ' 
         ' Connection_Save
         ' 
-        Connection_Save.Location = New Point(327, 347)
+        Connection_Save.Location = New Point(327, 396)
         Connection_Save.Name = "Connection_Save"
         Connection_Save.Size = New Size(193, 44)
-        Connection_Save.TabIndex = 10
+        Connection_Save.TabIndex = 11
         Connection_Save.Text = "Save Connection"
         Connection_Save.UseVisualStyleBackColor = True
         ' 
         ' Connection_Test
         ' 
-        Connection_Test.Location = New Point(682, 311)
+        Connection_Test.Location = New Point(682, 360)
         Connection_Test.Name = "Connection_Test"
         Connection_Test.Size = New Size(112, 34)
-        Connection_Test.TabIndex = 9
+        Connection_Test.TabIndex = 10
         Connection_Test.Text = "Test"
         Connection_Test.UseVisualStyleBackColor = True
         ' 
         ' Text_Password
         ' 
-        Text_Password.Location = New Point(172, 251)
+        Text_Password.Location = New Point(172, 300)
         Text_Password.Name = "Text_Password"
         Text_Password.Size = New Size(622, 31)
-        Text_Password.TabIndex = 8
+        Text_Password.TabIndex = 9
         ' 
         ' Text_User
         ' 
-        Text_User.Location = New Point(172, 212)
+        Text_User.Location = New Point(172, 261)
         Text_User.Name = "Text_User"
         Text_User.Size = New Size(622, 31)
-        Text_User.TabIndex = 7
+        Text_User.TabIndex = 8
         ' 
         ' Text_Server
         ' 
@@ -577,7 +628,7 @@ Partial Class Dashboard
         ' DC_L_Password
         ' 
         DC_L_Password.AutoSize = True
-        DC_L_Password.Location = New Point(72, 251)
+        DC_L_Password.Location = New Point(72, 300)
         DC_L_Password.Name = "DC_L_Password"
         DC_L_Password.Size = New Size(96, 25)
         DC_L_Password.TabIndex = 4
@@ -586,7 +637,7 @@ Partial Class Dashboard
         ' DC_L_User
         ' 
         DC_L_User.AutoSize = True
-        DC_L_User.Location = New Point(72, 212)
+        DC_L_User.Location = New Point(72, 261)
         DC_L_User.Name = "DC_L_User"
         DC_L_User.Size = New Size(56, 25)
         DC_L_User.TabIndex = 3
@@ -595,7 +646,7 @@ Partial Class Dashboard
         ' DC_L_Database
         ' 
         DC_L_Database.AutoSize = True
-        DC_L_Database.Location = New Point(72, 170)
+        DC_L_Database.Location = New Point(72, 219)
         DC_L_Database.Name = "DC_L_Database"
         DC_L_Database.Size = New Size(95, 25)
         DC_L_Database.TabIndex = 2
@@ -613,7 +664,7 @@ Partial Class Dashboard
         ' DC_Title
         ' 
         DC_Title.AutoSize = True
-        DC_Title.Font = New Font("Lucida Bright", 18.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        DC_Title.Font = New Font("Lucida Bright", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         DC_Title.Location = New Point(60, 43)
         DC_Title.Name = "DC_Title"
         DC_Title.Size = New Size(460, 42)
@@ -656,7 +707,7 @@ Partial Class Dashboard
         ' Label11
         ' 
         Label11.AutoSize = True
-        Label11.Font = New Font("Segoe UI", 6.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label11.Font = New Font("Segoe UI", 6F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label11.ForeColor = Color.DodgerBlue
         Label11.Location = New Point(507, 324)
         Label11.Name = "Label11"
@@ -709,7 +760,7 @@ Partial Class Dashboard
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Font = New Font("Segoe UI Historic", 16.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label8.Font = New Font("Segoe UI Historic", 16F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label8.Location = New Point(299, 74)
         Label8.Name = "Label8"
         Label8.Size = New Size(279, 45)
@@ -744,7 +795,7 @@ Partial Class Dashboard
         ' Daftar_Button
         ' 
         Daftar_Button.BackColor = SystemColors.ActiveCaptionText
-        Daftar_Button.Font = New Font("Arial Narrow", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Daftar_Button.Font = New Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Daftar_Button.ForeColor = Color.Transparent
         Daftar_Button.Location = New Point(327, 628)
         Daftar_Button.Name = "Daftar_Button"
@@ -756,7 +807,7 @@ Partial Class Dashboard
         ' Label_Jawaban
         ' 
         Label_Jawaban.AutoSize = True
-        Label_Jawaban.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label_Jawaban.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label_Jawaban.Location = New Point(45, 495)
         Label_Jawaban.Name = "Label_Jawaban"
         Label_Jawaban.Size = New Size(73, 21)
@@ -775,7 +826,7 @@ Partial Class Dashboard
         ' Label18
         ' 
         Label18.AutoSize = True
-        Label18.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label18.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label18.ForeColor = Color.FromArgb(CByte(255), CByte(128), CByte(128))
         Label18.Location = New Point(45, 355)
         Label18.Name = "Label18"
@@ -786,7 +837,7 @@ Partial Class Dashboard
         ' Label_Pertanyaan
         ' 
         Label_Pertanyaan.AutoSize = True
-        Label_Pertanyaan.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label_Pertanyaan.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label_Pertanyaan.Location = New Point(45, 377)
         Label_Pertanyaan.Name = "Label_Pertanyaan"
         Label_Pertanyaan.Size = New Size(91, 21)
@@ -805,7 +856,7 @@ Partial Class Dashboard
         ' Label16
         ' 
         Label16.AutoSize = True
-        Label16.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label16.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label16.Location = New Point(449, 198)
         Label16.Name = "Label16"
         Label16.Size = New Size(118, 21)
@@ -824,7 +875,7 @@ Partial Class Dashboard
         ' Label15
         ' 
         Label15.AutoSize = True
-        Label15.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label15.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label15.Location = New Point(37, 271)
         Label15.Name = "Label15"
         Label15.Size = New Size(81, 21)
@@ -842,7 +893,7 @@ Partial Class Dashboard
         ' Label14
         ' 
         Label14.AutoSize = True
-        Label14.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label14.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label14.Location = New Point(447, 117)
         Label14.Name = "Label14"
         Label14.Size = New Size(76, 21)
@@ -861,7 +912,7 @@ Partial Class Dashboard
         ' Label13
         ' 
         Label13.AutoSize = True
-        Label13.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label13.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label13.Location = New Point(37, 191)
         Label13.Name = "Label13"
         Label13.Size = New Size(49, 21)
@@ -871,7 +922,7 @@ Partial Class Dashboard
         ' Label12
         ' 
         Label12.AutoSize = True
-        Label12.Font = New Font("Segoe UI", 8.0F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label12.Font = New Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Label12.Location = New Point(33, 114)
         Label12.Name = "Label12"
         Label12.Size = New Size(54, 21)
@@ -898,7 +949,7 @@ Partial Class Dashboard
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Sylfaen", 22.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Font = New Font("Sylfaen", 22F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label7.Location = New Point(247, 43)
         Label7.Name = "Label7"
         Label7.Size = New Size(368, 58)
@@ -907,6 +958,7 @@ Partial Class Dashboard
         ' 
         ' Profile_Container
         ' 
+        Profile_Container.Controls.Add(profile_gopage)
         Profile_Container.Controls.Add(Label6)
         Profile_Container.Dock = DockStyle.Fill
         Profile_Container.Location = New Point(223, 0)
@@ -914,32 +966,95 @@ Partial Class Dashboard
         Profile_Container.Size = New Size(865, 744)
         Profile_Container.TabIndex = 0
         ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Location = New Point(403, 360)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(62, 25)
-        Label6.TabIndex = 1
-        Label6.Text = "Profile"
-        ' 
         ' Materi_Container
         ' 
+        Materi_Container.Controls.Add(materi_hapus)
+        Materi_Container.Controls.Add(materi_isi)
+        Materi_Container.Controls.Add(materi_tambah)
+        Materi_Container.Controls.Add(materi_insert)
+        Materi_Container.Controls.Add(materi_update)
         Materi_Container.Controls.Add(Label5)
+        Materi_Container.Controls.Add(materi_getdata)
+        Materi_Container.Controls.Add(dgMateri)
         Materi_Container.Dock = DockStyle.Fill
         Materi_Container.Location = New Point(223, 0)
         Materi_Container.Name = "Materi_Container"
         Materi_Container.Size = New Size(865, 744)
         Materi_Container.TabIndex = 0
         ' 
+        ' materi_hapus
+        ' 
+        materi_hapus.Location = New Point(518, 89)
+        materi_hapus.Name = "materi_hapus"
+        materi_hapus.Size = New Size(151, 43)
+        materi_hapus.TabIndex = 9
+        materi_hapus.Text = "Hapus Pilihan"
+        materi_hapus.UseVisualStyleBackColor = True
+        ' 
+        ' materi_isi
+        ' 
+        materi_isi.Location = New Point(673, 684)
+        materi_isi.Name = "materi_isi"
+        materi_isi.Size = New Size(151, 48)
+        materi_isi.TabIndex = 8
+        materi_isi.Text = "Isi Materi"
+        materi_isi.UseVisualStyleBackColor = True
+        ' 
+        ' materi_tambah
+        ' 
+        materi_tambah.Location = New Point(518, 563)
+        materi_tambah.Name = "materi_tambah"
+        materi_tambah.Size = New Size(151, 42)
+        materi_tambah.TabIndex = 7
+        materi_tambah.Text = "Tambah Judul"
+        materi_tambah.UseVisualStyleBackColor = True
+        ' 
+        ' materi_insert
+        ' 
+        materi_insert.Location = New Point(33, 519)
+        materi_insert.Multiline = True
+        materi_insert.Name = "materi_insert"
+        materi_insert.Size = New Size(457, 126)
+        materi_insert.TabIndex = 6
+        ' 
+        ' materi_update
+        ' 
+        materi_update.Location = New Point(682, 89)
+        materi_update.Name = "materi_update"
+        materi_update.Size = New Size(151, 43)
+        materi_update.TabIndex = 5
+        materi_update.Text = "Perbarui Judul"
+        materi_update.UseVisualStyleBackColor = True
+        ' 
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Location = New Point(403, 360)
+        Label5.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.Location = New Point(265, 20)
         Label5.Name = "Label5"
-        Label5.Size = New Size(62, 25)
-        Label5.TabIndex = 1
-        Label5.Text = "Materi"
+        Label5.Size = New Size(329, 65)
+        Label5.TabIndex = 4
+        Label5.Text = "Judul Materi"
+        ' 
+        ' materi_getdata
+        ' 
+        materi_getdata.BackColor = Color.Transparent
+        materi_getdata.BackgroundImage = My.Resources.Resources.refresh
+        materi_getdata.BackgroundImageLayout = ImageLayout.Zoom
+        materi_getdata.Location = New Point(37, 89)
+        materi_getdata.Name = "materi_getdata"
+        materi_getdata.Size = New Size(49, 46)
+        materi_getdata.TabIndex = 3
+        materi_getdata.UseVisualStyleBackColor = False
+        ' 
+        ' dgMateri
+        ' 
+        dgMateri.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgMateri.Location = New Point(37, 138)
+        dgMateri.Name = "dgMateri"
+        dgMateri.RowHeadersWidth = 62
+        dgMateri.Size = New Size(796, 369)
+        dgMateri.TabIndex = 2
         ' 
         ' Latihan_Container
         ' 
@@ -977,16 +1092,209 @@ Partial Class Dashboard
         Label3.TabIndex = 0
         Label3.Text = "Murid"
         ' 
+        ' materi_container_isi
+        ' 
+        materi_container_isi.Controls.Add(materi_isi_hapus)
+        materi_container_isi.Controls.Add(mater_isi_tam)
+        materi_container_isi.Controls.Add(materi_list)
+        materi_container_isi.Controls.Add(materi_judul_but)
+        materi_container_isi.Controls.Add(Panel3)
+        materi_container_isi.Controls.Add(materi_isi_per)
+        materi_container_isi.Controls.Add(materi_isi_tem)
+        materi_container_isi.Controls.Add(dgIsiMateri)
+        materi_container_isi.Controls.Add(Label19)
+        materi_container_isi.Dock = DockStyle.Fill
+        materi_container_isi.Location = New Point(223, 0)
+        materi_container_isi.Name = "materi_container_isi"
+        materi_container_isi.Size = New Size(865, 744)
+        materi_container_isi.TabIndex = 9
+        ' 
+        ' materi_isi_hapus
+        ' 
+        materi_isi_hapus.Location = New Point(470, 101)
+        materi_isi_hapus.Name = "materi_isi_hapus"
+        materi_isi_hapus.Size = New Size(174, 34)
+        materi_isi_hapus.TabIndex = 9
+        materi_isi_hapus.Text = "Hapus Isi Materi"
+        materi_isi_hapus.UseVisualStyleBackColor = True
+        ' 
+        ' mater_isi_tam
+        ' 
+        mater_isi_tam.Location = New Point(347, 641)
+        mater_isi_tam.Name = "mater_isi_tam"
+        mater_isi_tam.Size = New Size(159, 54)
+        mater_isi_tam.TabIndex = 8
+        mater_isi_tam.Text = "Tambahkan Isi"
+        mater_isi_tam.UseVisualStyleBackColor = True
+        ' 
+        ' materi_list
+        ' 
+        materi_list.FormattingEnabled = True
+        materi_list.Location = New Point(30, 99)
+        materi_list.Name = "materi_list"
+        materi_list.Size = New Size(182, 33)
+        materi_list.TabIndex = 6
+        ' 
+        ' materi_judul_but
+        ' 
+        materi_judul_but.Location = New Point(30, 691)
+        materi_judul_but.Name = "materi_judul_but"
+        materi_judul_but.Size = New Size(125, 41)
+        materi_judul_but.TabIndex = 5
+        materi_judul_but.Text = "Judul Materi"
+        materi_judul_but.UseVisualStyleBackColor = True
+        ' 
+        ' Panel3
+        ' 
+        Panel3.Controls.Add(Label23)
+        Panel3.Controls.Add(materi_page)
+        Panel3.Controls.Add(Label22)
+        Panel3.Controls.Add(materi_isi_video)
+        Panel3.Controls.Add(Label21)
+        Panel3.Controls.Add(materi_isi_judul)
+        Panel3.Controls.Add(Label20)
+        Panel3.Controls.Add(materi_isi_isi)
+        Panel3.Location = New Point(33, 358)
+        Panel3.Name = "Panel3"
+        Panel3.Size = New Size(791, 306)
+        Panel3.TabIndex = 4
+        ' 
+        ' Label23
+        ' 
+        Label23.AutoSize = True
+        Label23.Location = New Point(3, 72)
+        Label23.Name = "Label23"
+        Label23.Size = New Size(38, 25)
+        Label23.TabIndex = 8
+        Label23.Text = "Isi :"
+        ' 
+        ' materi_page
+        ' 
+        materi_page.Location = New Point(108, 259)
+        materi_page.Name = "materi_page"
+        materi_page.Size = New Size(180, 31)
+        materi_page.TabIndex = 7
+        materi_page.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        ' 
+        ' Label22
+        ' 
+        Label22.AutoSize = True
+        Label22.Location = New Point(6, 222)
+        Label22.Name = "Label22"
+        Label22.Size = New Size(67, 25)
+        Label22.TabIndex = 6
+        Label22.Text = "Video :"
+        ' 
+        ' materi_isi_video
+        ' 
+        materi_isi_video.BorderStyle = BorderStyle.FixedSingle
+        materi_isi_video.Location = New Point(108, 220)
+        materi_isi_video.Name = "materi_isi_video"
+        materi_isi_video.Size = New Size(683, 31)
+        materi_isi_video.TabIndex = 5
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.Location = New Point(4, 259)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(59, 25)
+        Label21.TabIndex = 3
+        Label21.Text = "Page :"
+        ' 
+        ' materi_isi_judul
+        ' 
+        materi_isi_judul.BorderStyle = BorderStyle.FixedSingle
+        materi_isi_judul.Location = New Point(108, 183)
+        materi_isi_judul.Name = "materi_isi_judul"
+        materi_isi_judul.Size = New Size(683, 31)
+        materi_isi_judul.TabIndex = 2
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.Location = New Point(4, 186)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(98, 25)
+        Label20.TabIndex = 1
+        Label20.Text = "Sub Judul :"
+        ' 
+        ' materi_isi_isi
+        ' 
+        materi_isi_isi.BorderStyle = BorderStyle.FixedSingle
+        materi_isi_isi.Location = New Point(47, 0)
+        materi_isi_isi.Multiline = True
+        materi_isi_isi.Name = "materi_isi_isi"
+        materi_isi_isi.Size = New Size(744, 172)
+        materi_isi_isi.TabIndex = 0
+        ' 
+        ' materi_isi_per
+        ' 
+        materi_isi_per.Location = New Point(650, 100)
+        materi_isi_per.Name = "materi_isi_per"
+        materi_isi_per.Size = New Size(174, 34)
+        materi_isi_per.TabIndex = 3
+        materi_isi_per.Text = "Perbarui Isi Materi"
+        materi_isi_per.UseVisualStyleBackColor = True
+        ' 
+        ' materi_isi_tem
+        ' 
+        materi_isi_tem.Location = New Point(218, 99)
+        materi_isi_tem.Name = "materi_isi_tem"
+        materi_isi_tem.Size = New Size(142, 34)
+        materi_isi_tem.TabIndex = 2
+        materi_isi_tem.Text = "Temukan Judul"
+        materi_isi_tem.UseVisualStyleBackColor = True
+        ' 
+        ' dgIsiMateri
+        ' 
+        dgIsiMateri.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgIsiMateri.Location = New Point(33, 138)
+        dgIsiMateri.Name = "dgIsiMateri"
+        dgIsiMateri.RowHeadersWidth = 62
+        dgIsiMateri.Size = New Size(791, 214)
+        dgIsiMateri.TabIndex = 1
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label19.Location = New Point(325, 25)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(253, 65)
+        Label19.TabIndex = 0
+        Label19.Text = "Isi Materi"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.Location = New Point(325, 0)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(188, 65)
+        Label6.TabIndex = 1
+        Label6.Text = "Profile"
+        ' 
+        ' profile_gopage
+        ' 
+        profile_gopage.Location = New Point(347, 608)
+        profile_gopage.Name = "profile_gopage"
+        profile_gopage.Size = New Size(124, 73)
+        profile_gopage.TabIndex = 2
+        profile_gopage.Text = "Masuk Menu Latihan"
+        profile_gopage.UseVisualStyleBackColor = True
+        ' 
         ' Dashboard
         ' 
-        AutoScaleDimensions = New SizeF(10.0F, 25.0F)
+        AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1088, 744)
-        Controls.Add(Login_Container)
-        Controls.Add(Database_Container)
-        Controls.Add(Daftar_Container)
         Controls.Add(Profile_Container)
+        Controls.Add(materi_container_isi)
         Controls.Add(Materi_Container)
+        Controls.Add(Database_Container)
+        Controls.Add(Login_Container)
+        Controls.Add(Daftar_Container)
         Controls.Add(Latihan_Container)
         Controls.Add(Murid_Container)
         Controls.Add(Content_Display)
@@ -1025,10 +1333,17 @@ Partial Class Dashboard
         Profile_Container.PerformLayout()
         Materi_Container.ResumeLayout(False)
         Materi_Container.PerformLayout()
+        CType(dgMateri, ComponentModel.ISupportInitialize).EndInit()
         Latihan_Container.ResumeLayout(False)
         Latihan_Container.PerformLayout()
         Murid_Container.ResumeLayout(False)
         Murid_Container.PerformLayout()
+        materi_container_isi.ResumeLayout(False)
+        materi_container_isi.PerformLayout()
+        Panel3.ResumeLayout(False)
+        Panel3.PerformLayout()
+        CType(materi_page, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgIsiMateri, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -1087,8 +1402,6 @@ Partial Class Dashboard
     Friend WithEvents Murid_Container As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Login_user As TextBox
@@ -1113,4 +1426,34 @@ Partial Class Dashboard
     Friend WithEvents Daftar_Button As Button
     Friend WithEvents Label_Jawaban As Label
     Friend WithEvents Daftar_Jawaban As TextBox
+    Friend WithEvents Text_Port As TextBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents dgMateri As DataGridView
+    Friend WithEvents Label5 As Label
+    Friend WithEvents materi_getdata As Button
+    Friend WithEvents materi_update As Button
+    Friend WithEvents materi_tambah As Button
+    Friend WithEvents materi_insert As TextBox
+    Friend WithEvents materi_isi As Button
+    Friend WithEvents materi_container_isi As Panel
+    Friend WithEvents materi_isi_per As Button
+    Friend WithEvents materi_isi_tem As Button
+    Friend WithEvents dgIsiMateri As DataGridView
+    Friend WithEvents Label19 As Label
+    Friend WithEvents materi_list As ComboBox
+    Friend WithEvents materi_judul_but As Button
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents materi_isi_isi As TextBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents materi_isi_judul As TextBox
+    Friend WithEvents Label20 As Label
+    Friend WithEvents mater_isi_tam As Button
+    Friend WithEvents materi_page As NumericUpDown
+    Friend WithEvents Label22 As Label
+    Friend WithEvents materi_isi_video As TextBox
+    Friend WithEvents materi_hapus As Button
+    Friend WithEvents materi_isi_hapus As Button
+    Friend WithEvents Label23 As Label
+    Friend WithEvents profile_gopage As Button
+    Friend WithEvents Label6 As Label
 End Class

@@ -79,6 +79,7 @@ Public Class Dashboard
         Materi_Container.Visible = False
         Latihan_Container.Visible = False
         Murid_Container.Visible = False
+        materi_container_isi.Visible = False
         If val = 0 Then
             Content_Display.Visible = True
         ElseIf val = 1 Then
@@ -95,6 +96,8 @@ Public Class Dashboard
             Latihan_Container.Visible = True
         ElseIf val = 7 Then
             Murid_Container.Visible = True
+        ElseIf val = 8 Then
+            materi_container_isi.Visible = True
         End If
     End Sub
 
@@ -131,9 +134,10 @@ Public Class Dashboard
                 PositionMenu(2)
                 Dim GetData As String() = Connector.GetDataBaseInfo()
                 Text_Server.Text = GetData(0)
-                TextBox_Data.Text = GetData(1)
-                Text_User.Text = GetData(2)
-                Text_Password.Text = GetData(3)
+                Text_Port.Text = GetData(1)
+                TextBox_Data.Text = GetData(2)
+                Text_User.Text = GetData(3)
+                Text_Password.Text = GetData(4)
             Else
                 PositionMenu(1)
                 MessageBox.Show("Gagal terhubung ke database, periksa koneksi database!")
@@ -148,6 +152,8 @@ Public Class Dashboard
         ConnectorActivities()
         ActivePage(0)
         PannelPosition(0)
+        dgMateri.AllowUserToAddRows = False
+        materi_list.DropDownStyle = ComboBoxStyle.DropDownList
     End Sub
 
     Private Sub Exit_Button_Click(sender As Object, e As EventArgs) Handles Exit_Button.Click
@@ -159,7 +165,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Connection_Test_Click(sender As Object, e As EventArgs) Handles Connection_Test.Click
-        If Connector.CheckConnection(Text_Server.Text, TextBox_Data.Text, Text_Password.Text, Text_User.Text) Then
+        If Connector.CheckConnection(Text_Server.Text, Text_Port.Text.Trim(), TextBox_Data.Text, Text_Password.Text, Text_User.Text) Then
             MessageBox.Show("Berhasil Terhubung")
         Else
             MessageBox.Show("Gagal Terhubung ke Database")
@@ -167,8 +173,8 @@ Public Class Dashboard
     End Sub
 
     Private Sub Connection_Save_Click(sender As Object, e As EventArgs) Handles Connection_Save.Click
-        If Connector.CheckConnection(Text_Server.Text, TextBox_Data.Text, Text_Password.Text, Text_User.Text) Then
-            If Connector.CreateJson(Text_Server.Text, TextBox_Data.Text, Text_Password.Text, Text_User.Text) Then
+        If Connector.CheckConnection(Text_Server.Text.Trim(), Text_Port.Text.Trim(), TextBox_Data.Text.Trim(), Text_Password.Text.Trim(), Text_User.Text.Trim()) Then
+            If Connector.CreateJson(Text_Server.Text, Text_Port.Text.Trim(), TextBox_Data.Text.Trim(), Text_Password.Text.Trim(), Text_User.Text.Trim()) Then
                 MessageBox.Show("Database Berhasil Disimpan")
                 If Connector.MigrateDatabase() Then
                     PositionPage = 0
@@ -312,6 +318,7 @@ Public Class Dashboard
             ActivePage(5)
             PannelPosition(5)
             PositionPage = 5
+            GetMateri()
         Else
 
         End If
@@ -321,6 +328,8 @@ Public Class Dashboard
             ActivePage(5)
             PannelPosition(5)
             PositionPage = 5
+            GetMateri()
+
         Else
 
         End If
@@ -330,6 +339,7 @@ Public Class Dashboard
             ActivePage(5)
             PannelPosition(5)
             PositionPage = 5
+            GetMateri()
         Else
 
         End If
@@ -390,6 +400,7 @@ Public Class Dashboard
 
         End If
     End Sub
+
 
     Private Sub Daftar_Button_Click(sender As Object, e As EventArgs) Handles Daftar_Button.Click
         Dim errorMes As String = ""
@@ -523,5 +534,166 @@ Public Class Dashboard
         Else
             MessageBox.Show("Login Gagal. Username atau Email dan password salah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+    End Sub
+
+    Sub GetMateri()
+        dgMateri.DataSource = Connector.GetMateriData()
+        dgMateri.Columns("id_materi").Visible = False
+    End Sub
+
+    Sub GetIsiMateri()
+        If materi_list.Text = "" Then
+            MessageBox.Show("Kamu Belum Memasukkan Judul Materi")
+        Else
+            dgIsiMateri.DataSource = Connector.GetIsiMateri(materi_list.Text)
+            dgIsiMateri.Columns("id_materi").Visible = False
+            dgIsiMateri.Columns("id_isi").Visible = False
+        End If
+    End Sub
+
+    Private Sub materi_getdata_Click(sender As Object, e As EventArgs) Handles materi_getdata.Click
+        GetMateri()
+    End Sub
+
+
+    Private Sub materi_update_Click(sender As Object, e As EventArgs) Handles materi_update.Click
+        Dim selectedRow As DataGridViewRow = dgMateri.CurrentRow
+
+        If selectedRow IsNot Nothing Then
+            Dim rowIndex As Integer = selectedRow.Index
+            Dim idMateri As Integer = Convert.ToInt32(selectedRow.Cells("id_materi").Value)
+            Dim columnName As String = dgMateri.CurrentCell.OwningColumn.Name
+            Dim newValue As String = Convert.ToString(dgMateri.CurrentCell.Value)
+
+            Connector.UpdateMateriField(idMateri, columnName, newValue)
+            GetMateri()
+        End If
+    End Sub
+
+    Private Sub materi_tambah_Click(sender As Object, e As EventArgs) Handles materi_tambah.Click
+        If Connector.InsertMateri(materi_insert.Text.Trim()) Then
+            materi_insert.Text = ""
+            GetMateri()
+        Else
+            MessageBox.Show("Gagal Menambahkan Judul")
+        End If
+    End Sub
+
+    Private Sub materi_judul_but_Click(sender As Object, e As EventArgs) Handles materi_judul_but.Click
+        If PositionPage <> 5 Then
+            ActivePage(5)
+            PannelPosition(5)
+            PositionPage = 5
+            GetMateri()
+        Else
+
+        End If
+    End Sub
+
+    Private Sub SearchList()
+        materi_list.Items.Clear()
+        Dim judulList As List(Of String) = Connector.SearchListMateri()
+        materi_list.Items.AddRange(judulList.ToArray())
+    End Sub
+
+    Private Sub materi_isi_Click(sender As Object, e As EventArgs) Handles materi_isi.Click
+        If PositionPage <> 8 Then
+            PannelPosition(8)
+            PositionPage = 8
+            SearchList()
+        Else
+
+        End If
+
+    End Sub
+
+    Private Sub materi_isi_tem_Click(sender As Object, e As EventArgs) Handles materi_isi_tem.Click
+        GetIsiMateri()
+    End Sub
+
+    Private Sub materi_hapus_Click(sender As Object, e As EventArgs) Handles materi_hapus.Click
+        Dim selectedRow As DataGridViewRow = dgMateri.CurrentRow
+
+        If selectedRow IsNot Nothing Then
+            Dim idMateri As Integer = Convert.ToInt32(selectedRow.Cells("id_materi").Value)
+
+            ' Panggil fungsi DeleteMateri dari instance databaseHandler
+            If Connector.DeleteMateri(idMateri) Then
+                GetMateri()
+            Else
+                MessageBox.Show("Gagal menghapus data.")
+            End If
+        Else
+            MessageBox.Show("Pilih baris yang ingin dihapus.")
+        End If
+    End Sub
+
+    Private Sub mater_isi_tam_Click(sender As Object, e As EventArgs) Handles mater_isi_tam.Click
+        Dim subJudul As String = materi_isi_judul.Text
+        Dim page As Integer = materi_page.Text
+        Dim isi As String = materi_isi_isi.Text.Trim()
+        Dim vidio As String = materi_isi_video.Text
+        Dim idMateri As Integer = Connector.GetIdMateriByJudul(materi_list.Text)
+        If idMateri = 0 Then
+            MessageBox.Show("Harap Temukan Judul!!")
+        Else
+            If Connector.InsertIsiMateri(subJudul, page, isi, vidio, idMateri) Then
+                GetIsiMateri()
+                materi_isi_judul.Text = ""
+                materi_page.Value = 1
+                materi_isi_isi.Text = ""
+                materi_isi_video.Text = ""
+            Else
+                MessageBox.Show("Gagal menyisipkan data.")
+            End If
+        End If
+
+    End Sub
+
+    Private Sub materi_isi_hapus_Click(sender As Object, e As EventArgs) Handles materi_isi_hapus.Click
+        Dim selectedRow As DataGridViewRow = dgIsiMateri.CurrentRow
+
+        If selectedRow IsNot Nothing Then
+            Dim idIsi As Integer = Convert.ToInt32(selectedRow.Cells("id_isi").Value)
+
+            If Connector.DeleteIsiMateri(idIsi) Then
+                GetIsiMateri()
+            Else
+                MessageBox.Show("Gagal menghapus data.")
+            End If
+        Else
+            MessageBox.Show("Pilih baris yang ingin dihapus.")
+        End If
+    End Sub
+
+    Private Sub materi_isi_per_Click(sender As Object, e As EventArgs) Handles materi_isi_per.Click
+        For Each row As DataGridViewRow In dgIsiMateri.Rows
+            ' Pastikan baris bukan baris header
+            If Not row.IsNewRow Then
+                ' Ambil nilai dari setiap sel dalam baris
+                Dim idIsi As Long = Convert.ToInt64(row.Cells("id_isi").Value)
+                Dim subJudul As String = Convert.ToString(row.Cells("sub_judul").Value)
+                Dim page As Integer = Convert.ToInt32(row.Cells("page").Value)
+                Dim isi As String = Convert.ToString(row.Cells("isi").Value)
+                Dim vidio As String = Convert.ToString(row.Cells("vidio").Value)
+                Dim idMateri As Long = Convert.ToInt64(row.Cells("id_materi").Value)
+
+                If Connector.UpdateIsiMateri(idIsi, subJudul, page, isi, vidio, idMateri) Then
+                Else
+                    MessageBox.Show("Gagal memperbarui data.")
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub materi_list_SelectedIndexChanged(sender As Object, e As EventArgs) Handles materi_list.SelectedIndexChanged
+        GetIsiMateri()
+    End Sub
+
+    Private Sub profile_gopage_Click(sender As Object, e As EventArgs) Handles profile_gopage.Click
+        Dim gopage As New Home
+        gopage.save_profile = Save_Profile
+        gopage.Show()
+        Me.Hide()
     End Sub
 End Class

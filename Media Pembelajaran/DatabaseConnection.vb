@@ -7,6 +7,7 @@ Imports BCrypt
 Public Class DatabaseConnection
     Dim conn As New MySqlConnection
     Dim Server As String
+    Dim Port As String
     Dim Database As String
     Dim Password As String
     Dim UserId As String
@@ -19,6 +20,7 @@ Public Class DatabaseConnection
                 Dim jsonContent As String = File.ReadAllText(jsonFilePath)
                 Dim savedDatabase As Database = JsonConvert.DeserializeObject(Of Database)(jsonContent)
                 Server = savedDatabase.server
+                Port = savedDatabase.port
                 Database = savedDatabase.database
                 Password = savedDatabase.password
                 UserId = savedDatabase.userid
@@ -32,18 +34,19 @@ Public Class DatabaseConnection
     End Function
 
     Public Function GetDataBaseInfo() As String()
-        Dim saved(3) As String
+        Dim saved(4) As String
         saved(0) = Server
-        saved(1) = Database
-        saved(2) = UserId
-        saved(3) = Password
+        saved(1) = Port
+        saved(2) = Database
+        saved(3) = UserId
+        saved(4) = Password
 
         Return saved
     End Function
 
     Public Function Login(user As String, cPassword As String, orEmail As Boolean) As String()
         Try
-            conn.ConnectionString = $"server={Server};database={Database};userid={UserId};password={Password}"
+            conn.ConnectionString = $"server={Server}; port={Port}; database={Database};userid={UserId};password={Password}"
             conn.Open()
             Dim saved(5) As String
 
@@ -103,7 +106,7 @@ Public Class DatabaseConnection
 
     Public Function ConnectToDatabase() As Boolean
         Try
-            conn.ConnectionString = $"server={Server};database={Database};userid={UserId};password={Password}"
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
             conn.Open()
             Return True
         Catch ex As Exception
@@ -113,11 +116,11 @@ Public Class DatabaseConnection
         End Try
     End Function
 
-    Public Function CheckConnection(CServer As String, CDatabase As String, CPassword As String, CUserid As String) As Boolean
+    Public Function CheckConnection(CServer As String, CPort As String, CDatabase As String, CPassword As String, CUserid As String) As Boolean
         Dim TestConn As New MySqlConnection
 
         Try
-            TestConn.ConnectionString = $"server={CServer};database={CDatabase};userid={CUserid};password={CPassword}"
+            TestConn.ConnectionString = $"server={CServer}; port={CPort};database={CDatabase};userid={CUserid};password={CPassword}"
             TestConn.Open()
             Return True
         Catch ex As Exception
@@ -127,10 +130,13 @@ Public Class DatabaseConnection
         End Try
     End Function
 
-    Public Function CreateJson(CServer As String, CDatabase As String, CPassword As String, CUserid As String) As Boolean
+
+
+    Public Function CreateJson(CServer As String, CPort As String, CDatabase As String, CPassword As String, CUserid As String) As Boolean
         Try
             Dim saveDatabase As New Database With {
                 .server = CServer,
+                .port = CPort,
                 .database = CDatabase,
                 .password = CPassword,
                 .userid = CUserid
@@ -145,7 +151,7 @@ Public Class DatabaseConnection
 
     Public Function MigrateDatabase() As Boolean
         Try
-            conn.ConnectionString = $"server={Server};database={Database};userid={UserId};password={Password}"
+            conn.ConnectionString = $"server={Server}; port={Port};database={Database};userid={UserId};password={Password}"
             conn.Open()
 
             Dim createTableQuery As String = "CREATE TABLE IF NOT EXISTS akun (
@@ -166,7 +172,9 @@ CREATE TABLE IF NOT EXISTS materi (
 
 CREATE TABLE IF NOT EXISTS isi_materi (
     id_isi BIGINT PRIMARY KEY NOT NULL,
-    isi TEXT NOT NULL,
+    sub_judul TEXT,
+    page INT,
+    isi TEXT,
     vidio VARCHAR(255),
     id_materi BIGINT NOT NULL,
     FOREIGN KEY (id_materi) REFERENCES materi(id_materi)
@@ -219,9 +227,9 @@ CREATE TABLE IF NOT EXISTS selesai_latihan (
 
     Public Function DaftarAkun(Nama As String, Username As String, Email As String, Passwords As String, Pertanyaan As String, Jawaban As String, Role As String) As Boolean
         Try
-            conn.ConnectionString = $"server={Server};database={Database};userid={UserId};password={Password}"
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
             conn.Open()
-            Dim key As Integer = GenerateUniqueNumericKey()
+            Dim key As Integer = GenerateUniqueNumericKey("akun", "id_akun")
             Dim insertQuery As String = $"INSERT INTO akun (id_akun, nama, username, email, password, pertanyaan, jawaban, roles) VALUES (@id_akun, @Nama, @Username, @Email, @Password, @Pertanyaan, @Jawaban, @Role)"
             Dim insertCommand As New MySqlCommand(insertQuery, conn)
             insertCommand.Parameters.AddWithValue("@id_akun", key)
@@ -248,7 +256,7 @@ CREATE TABLE IF NOT EXISTS selesai_latihan (
 
     Public Function CheckAdminRole() As Boolean
         Try
-            conn.ConnectionString = $"server={Server};database={Database};userid={UserId};password={Password}"
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
             conn.Open()
             Dim query As String = "SELECT COUNT(*) FROM akun WHERE Role = 'Pengajar'"
             Dim command As New MySqlCommand(query, conn)
@@ -263,20 +271,235 @@ CREATE TABLE IF NOT EXISTS selesai_latihan (
         End Try
     End Function
 
-    Private Function GenerateUniqueNumericKey() As Integer
+    Public Function GetMateriData() As DataTable
+        Dim dataTable As New DataTable()
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim query As String = "SELECT * FROM materi"
+            Dim adapter As New MySqlDataAdapter(query, conn)
+            adapter.Fill(dataTable)
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+        Return dataTable
+    End Function
+
+    Public Sub UpdateMateriField(idMateri As Integer, fieldName As String, newValue As String)
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = $"UPDATE materi SET {fieldName} = @newValue WHERE id_materi = @idMateri"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idMateri", idMateri)
+                command.Parameters.AddWithValue("@newValue", newValue)
+                command.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
+    Public Function InsertMateri(judul As String) As Boolean
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim key As Integer = GenerateUniqueNumericKey("materi", "id_materi")
+
+            Dim query As String = "INSERT INTO materi (id_materi,judul) VALUES (@id_materi,@judul)"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@id_materi", key)
+                command.Parameters.AddWithValue("@judul", judul)
+                command.ExecuteNonQuery()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+    Public Function SearchListMateri()
+        Dim judulList As New List(Of String)
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim query As String = "SELECT judul FROM materi"
+            Using command As New MySqlCommand(query, conn)
+                Using reader As MySqlDataReader = command.ExecuteReader()
+                    While reader.Read()
+                        judulList.Add(reader("judul").ToString())
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+        Return judulList
+    End Function
+
+    Public Function GetIsiMateri(judul As String) As DataTable
+        Dim dataTable As New DataTable()
+
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim query As String = "SELECT isi_materi.* FROM isi_materi
+                                   JOIN materi ON isi_materi.id_materi = materi.id_materi
+                                   WHERE materi.judul = @judul"
+
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@judul", judul)
+                Using adapter As New MySqlDataAdapter(command)
+                    adapter.Fill(dataTable)
+                End Using
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+
+        Return dataTable
+    End Function
+
+    Public Function DeleteMateri(idMateri As Integer) As Boolean
+        Try
+            conn.Open()
+
+            Dim query As String = "DELETE FROM materi WHERE id_materi = @idMateri"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idMateri", idMateri)
+                command.ExecuteNonQuery()
+            End Using
+
+            Return True
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+            Return False
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+    Public Function GetIdMateriByJudul(judul As String) As Long
+        Try
+            conn.Open()
+
+            Dim query As String = "SELECT id_materi FROM materi WHERE judul = @judul"
+
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@judul", judul)
+
+                Dim result As Object = command.ExecuteScalar()
+
+                If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
+                    Return Convert.ToInt64(result)
+                Else
+                    Return 0
+                End If
+            End Using
+        Catch ex As Exception
+            Return 0
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+    Public Function InsertIsiMateri(subJudul As String, page As Integer, isi As String, vidio As String, idMateri As Integer) As Boolean
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim key As Integer = GenerateUniqueNumericKey("isi_materi", "id_isi")
+
+            Dim query As String = "INSERT INTO isi_materi (id_isi ,sub_judul, page, isi, vidio, id_materi) VALUES (@id_isi,@subJudul, @page, @isi, @vidio, @idMateri)"
+
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@id_isi", key)
+                command.Parameters.AddWithValue("@subJudul", subJudul)
+                command.Parameters.AddWithValue("@page", page)
+                command.Parameters.AddWithValue("@isi", isi)
+                command.Parameters.AddWithValue("@vidio", vidio)
+                command.Parameters.AddWithValue("@idMateri", idMateri)
+                command.ExecuteNonQuery()
+            End Using
+
+            Return True
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+            Return False
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+    Public Function DeleteIsiMateri(idIsi As Integer) As Boolean
+        Try
+            conn.Open()
+
+            Dim query As String = "DELETE FROM isi_materi WHERE id_isi = @idIsi"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idIsi", idIsi)
+                command.ExecuteNonQuery()
+            End Using
+
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+    Public Function UpdateIsiMateri(idIsi As Integer, subJudul As String, page As Integer, isi As String, vidio As String, idMateri As Long) As Boolean
+        Try
+
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "UPDATE isi_materi SET sub_judul = @subJudul, page = @page, isi = @isi, vidio = @vidio, id_materi = @idMateri WHERE id_isi = @idIsi"
+
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idIsi", idIsi)
+                command.Parameters.AddWithValue("@subJudul", subJudul)
+                command.Parameters.AddWithValue("@page", page)
+                command.Parameters.AddWithValue("@isi", isi)
+                command.Parameters.AddWithValue("@vidio", vidio)
+                command.Parameters.AddWithValue("@idMateri", idMateri)
+
+                command.ExecuteNonQuery()
+            End Using
+
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+    Private Function GenerateUniqueNumericKey(dbname As String, dbid As String) As Integer
         Dim random As New Random()
         Dim key As Integer
 
         Do
             key = random.Next(1000000, 10000000)
-        Loop Until IsKeyUnique(key)
+        Loop Until IsKeyUnique(key, dbname, dbid)
 
         Return key
     End Function
 
-    Private Function IsKeyUnique(key As String) As Boolean
+    Private Function IsKeyUnique(key As String, dbname As String, dbid As String) As Boolean
         Try
-            Dim query As String = "SELECT COUNT(*) FROM akun WHERE id_akun = @key"
+            Dim query As String = $"SELECT COUNT(*) FROM {dbname} WHERE {dbid} = @key"
             Dim command As New MySqlCommand(query, conn)
             command.Parameters.AddWithValue("@key", key)
 
