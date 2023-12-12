@@ -54,6 +54,10 @@ Partial Class Dashboard
         Active_Murid = New Button()
         Murid_Label = New Label()
         Icon_Murid = New Button()
+        Developer = New Panel()
+        Developer_Active = New Button()
+        Developer_Label = New Label()
+        Developer_Icon = New Button()
         Minimize_Button = New Button()
         Exit_Button = New Button()
         Database_Container = New Panel()
@@ -165,6 +169,9 @@ Partial Class Dashboard
         materi_isi_tem = New Button()
         dgIsiMateri = New DataGridView()
         Label19 = New Label()
+        Developer_Panel = New Panel()
+        Label33 = New Label()
+        Label32 = New Label()
         Panel1.SuspendLayout()
         Flow_Menu.SuspendLayout()
         Login.SuspendLayout()
@@ -174,6 +181,7 @@ Partial Class Dashboard
         Materi.SuspendLayout()
         Latihan.SuspendLayout()
         Murid.SuspendLayout()
+        Developer.SuspendLayout()
         Database_Container.SuspendLayout()
         Login_Container.SuspendLayout()
         Daftar_Container.SuspendLayout()
@@ -189,6 +197,7 @@ Partial Class Dashboard
         Panel3.SuspendLayout()
         CType(materi_page, ComponentModel.ISupportInitialize).BeginInit()
         CType(dgIsiMateri, ComponentModel.ISupportInitialize).BeginInit()
+        Developer_Panel.SuspendLayout()
         SuspendLayout()
         ' 
         ' Panel1
@@ -224,6 +233,7 @@ Partial Class Dashboard
         Flow_Menu.Controls.Add(Materi)
         Flow_Menu.Controls.Add(Latihan)
         Flow_Menu.Controls.Add(Murid)
+        Flow_Menu.Controls.Add(Developer)
         Flow_Menu.Location = New Point(0, 55)
         Flow_Menu.Name = "Flow_Menu"
         Flow_Menu.Size = New Size(223, 649)
@@ -542,6 +552,52 @@ Partial Class Dashboard
         Icon_Murid.Size = New Size(49, 35)
         Icon_Murid.TabIndex = 0
         Icon_Murid.UseVisualStyleBackColor = False
+        ' 
+        ' Developer
+        ' 
+        Developer.Controls.Add(Developer_Active)
+        Developer.Controls.Add(Developer_Label)
+        Developer.Controls.Add(Developer_Icon)
+        Developer.Location = New Point(3, 395)
+        Developer.Name = "Developer"
+        Developer.Size = New Size(223, 50)
+        Developer.TabIndex = 8
+        ' 
+        ' Developer_Active
+        ' 
+        Developer_Active.BackColor = Color.Gold
+        Developer_Active.FlatAppearance.BorderSize = 0
+        Developer_Active.FlatStyle = FlatStyle.Flat
+        Developer_Active.Location = New Point(0, 0)
+        Developer_Active.Name = "Developer_Active"
+        Developer_Active.Size = New Size(15, 50)
+        Developer_Active.TabIndex = 1
+        Developer_Active.UseVisualStyleBackColor = False
+        ' 
+        ' Developer_Label
+        ' 
+        Developer_Label.AutoSize = True
+        Developer_Label.Font = New Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Developer_Label.ForeColor = SystemColors.ControlLightLight
+        Developer_Label.Location = New Point(84, 9)
+        Developer_Label.Name = "Developer_Label"
+        Developer_Label.Size = New Size(124, 30)
+        Developer_Label.TabIndex = 1
+        Developer_Label.Text = "Developer"
+        ' 
+        ' Developer_Icon
+        ' 
+        Developer_Icon.BackColor = Color.Transparent
+        Developer_Icon.BackgroundImage = My.Resources.Resources.icons8_male_user_64
+        Developer_Icon.BackgroundImageLayout = ImageLayout.Zoom
+        Developer_Icon.FlatAppearance.BorderSize = 0
+        Developer_Icon.FlatStyle = FlatStyle.Flat
+        Developer_Icon.Location = New Point(41, 7)
+        Developer_Icon.Margin = New Padding(0)
+        Developer_Icon.Name = "Developer_Icon"
+        Developer_Icon.Size = New Size(49, 35)
+        Developer_Icon.TabIndex = 0
+        Developer_Icon.UseVisualStyleBackColor = False
         ' 
         ' Minimize_Button
         ' 
@@ -1640,11 +1696,43 @@ Partial Class Dashboard
         Label19.TabIndex = 0
         Label19.Text = "Isi Materi"
         ' 
+        ' Developer_Panel
+        ' 
+        Developer_Panel.Controls.Add(Label32)
+        Developer_Panel.Controls.Add(Label33)
+        Developer_Panel.Dock = DockStyle.Fill
+        Developer_Panel.Location = New Point(223, 0)
+        Developer_Panel.Name = "Developer_Panel"
+        Developer_Panel.Size = New Size(865, 744)
+        Developer_Panel.TabIndex = 8
+        ' 
+        ' Label33
+        ' 
+        Label33.AutoSize = True
+        Label33.Font = New Font("Times New Roman", 22F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label33.Location = New Point(250, 25)
+        Label33.Name = "Label33"
+        Label33.Size = New Size(328, 51)
+        Label33.TabIndex = 0
+        Label33.Text = "Team Developer"
+        ' 
+        ' Label32
+        ' 
+        Label32.AutoSize = True
+        Label32.Font = New Font("Times New Roman", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label32.Location = New Point(60, 141)
+        Label32.Name = "Label32"
+        Label32.Size = New Size(668, 410)
+        Label32.TabIndex = 1
+        Label32.Text = resources.GetString("Label32.Text")
+        Label32.TextAlign = ContentAlignment.MiddleLeft
+        ' 
         ' Dashboard
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1088, 744)
+        Controls.Add(Developer_Panel)
         Controls.Add(Profile_Container)
         Controls.Add(Content_Display)
         Controls.Add(container_soal)
@@ -1678,6 +1766,8 @@ Partial Class Dashboard
         Latihan.PerformLayout()
         Murid.ResumeLayout(False)
         Murid.PerformLayout()
+        Developer.ResumeLayout(False)
+        Developer.PerformLayout()
         Database_Container.ResumeLayout(False)
         Database_Container.PerformLayout()
         Login_Container.ResumeLayout(False)
@@ -1703,6 +1793,8 @@ Partial Class Dashboard
         Panel3.PerformLayout()
         CType(materi_page, ComponentModel.ISupportInitialize).EndInit()
         CType(dgIsiMateri, ComponentModel.ISupportInitialize).EndInit()
+        Developer_Panel.ResumeLayout(False)
+        Developer_Panel.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -1848,4 +1940,11 @@ Partial Class Dashboard
     Friend WithEvents profile_roles As Label
     Friend WithEvents profile_email As Label
     Friend WithEvents Logout As Button
+    Friend WithEvents Developer As Panel
+    Friend WithEvents Developer_Active As Button
+    Friend WithEvents Developer_Label As Label
+    Friend WithEvents Developer_Icon As Button
+    Friend WithEvents Developer_Panel As Panel
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label32 As Label
 End Class

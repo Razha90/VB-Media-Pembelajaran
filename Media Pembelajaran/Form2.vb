@@ -23,6 +23,8 @@ Public Class Dashboard
             Murid.Visible = False
 
             Flow_Menu.Controls.SetChildIndex(Database, 0)
+            Flow_Menu.Controls.SetChildIndex(Developer, 1)
+
         ElseIf val = 2 Then
             Database.Visible = True
             Login.Visible = True
@@ -35,6 +37,7 @@ Public Class Dashboard
             Flow_Menu.Controls.SetChildIndex(Login, 0)
             Flow_Menu.Controls.SetChildIndex(Daftar, 1)
             Flow_Menu.Controls.SetChildIndex(Database, 2)
+            Flow_Menu.Controls.SetChildIndex(Developer, 3)
 
         ElseIf val = 3 Then
             Database.Visible = False
@@ -46,6 +49,8 @@ Public Class Dashboard
             Murid.Visible = False
 
             Flow_Menu.Controls.SetChildIndex(Profile, 0)
+            Flow_Menu.Controls.SetChildIndex(Developer, 1)
+
         ElseIf val = 4 Then
             Login.Visible = False
             Daftar.Visible = False
@@ -60,6 +65,7 @@ Public Class Dashboard
             Flow_Menu.Controls.SetChildIndex(Latihan, 2)
             Flow_Menu.Controls.SetChildIndex(Murid, 3)
             Flow_Menu.Controls.SetChildIndex(Database, 4)
+            Flow_Menu.Controls.SetChildIndex(Developer, 5)
 
 
             Database.Top = 227
@@ -82,6 +88,7 @@ Public Class Dashboard
         Murid_Container.Visible = False
         materi_container_isi.Visible = False
         container_soal.Visible = False
+        Developer_Panel.Visible = False
         If val = 0 Then
             Content_Display.Visible = True
         ElseIf val = 1 Then
@@ -102,6 +109,8 @@ Public Class Dashboard
             materi_container_isi.Visible = True
         ElseIf val = 9 Then
             container_soal.Visible = True
+        ElseIf val = 10 Then
+            Developer_Panel.Visible = True
         End If
     End Sub
 
@@ -114,6 +123,7 @@ Public Class Dashboard
         Active_Materi.Visible = False
         Active_Latihan.Visible = False
         Active_Murid.Visible = False
+        Developer_Active.Visible = False
         If val = 0 Then
         ElseIf val = 1 Then
             Active_Login.Visible = True
@@ -129,6 +139,8 @@ Public Class Dashboard
             Active_Latihan.Visible = True
         ElseIf val = 7 Then
             Active_Murid.Visible = True
+        ElseIf val = 8 Then
+            Developer_Active.Visible = True
         End If
     End Sub
 
@@ -407,6 +419,37 @@ Public Class Dashboard
 
         End If
     End Sub
+
+    Private Sub Developer_Label_Click(sender As Object, e As EventArgs) Handles Developer_Label.Click
+        If PositionPage <> 9 Then
+            ActivePage(8)
+            PannelPosition(10)
+            PositionPage = 9
+        Else
+
+        End If
+    End Sub
+
+    Private Sub Developer_Icon_Click(sender As Object, e As EventArgs) Handles Developer_Icon.Click
+        If PositionPage <> 9 Then
+            ActivePage(8)
+            PannelPosition(10)
+            PositionPage = 9
+        Else
+
+        End If
+    End Sub
+
+    Private Sub Developer_Click(sender As Object, e As EventArgs) Handles Developer.Click
+        If PositionPage <> 9 Then
+            ActivePage(8)
+            PannelPosition(10)
+            PositionPage = 9
+        Else
+
+        End If
+    End Sub
+
 
 
     Private Sub Daftar_Button_Click(sender As Object, e As EventArgs) Handles Daftar_Button.Click
