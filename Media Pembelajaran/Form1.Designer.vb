@@ -31,24 +31,39 @@ Partial Class Home
         profile_role = New Label()
         profile_nama = New Label()
         Latihan = New Panel()
+        latihan_kanan = New Panel()
+        lblPertanyaan = New Label()
+        btnNext = New Button()
+        btnPrevious = New Button()
+        latihan_kiri = New Panel()
+        FlowLayoutPanel1 = New FlowLayoutPanel()
+        Panel2 = New Panel()
+        latihan_keluar = New Button()
+        Label3 = New Label()
         Belajar = New Panel()
-        belajar_default = New Panel()
-        Label2 = New Label()
         belajar_layout = New Panel()
+        belajar_subJudul = New Label()
         belajar_isi = New Panel()
         belajar_text = New TextBox()
         belajar_next = New Button()
         belajar_previous = New Button()
+        belajar_default = New Panel()
+        Label2 = New Label()
         Panel1 = New Panel()
+        belajar_keluar = New Button()
         Panel3 = New Panel()
         Label1 = New Label()
         belajar_flowLayout = New FlowLayoutPanel()
         BackPanel.SuspendLayout()
         profile_panel.SuspendLayout()
+        Latihan.SuspendLayout()
+        latihan_kanan.SuspendLayout()
+        latihan_kiri.SuspendLayout()
+        Panel2.SuspendLayout()
         Belajar.SuspendLayout()
-        belajar_default.SuspendLayout()
         belajar_layout.SuspendLayout()
         belajar_isi.SuspendLayout()
+        belajar_default.SuspendLayout()
         Panel1.SuspendLayout()
         Panel3.SuspendLayout()
         SuspendLayout()
@@ -122,6 +137,8 @@ Partial Class Home
         ' 
         ' Latihan
         ' 
+        Latihan.Controls.Add(latihan_kanan)
+        Latihan.Controls.Add(latihan_kiri)
         Latihan.Dock = DockStyle.Fill
         Latihan.Location = New Point(0, 0)
         Latihan.Name = "Latihan"
@@ -129,10 +146,96 @@ Partial Class Home
         Latihan.TabIndex = 4
         Latihan.Visible = False
         ' 
+        ' latihan_kanan
+        ' 
+        latihan_kanan.Controls.Add(lblPertanyaan)
+        latihan_kanan.Controls.Add(btnNext)
+        latihan_kanan.Controls.Add(btnPrevious)
+        latihan_kanan.Dock = DockStyle.Fill
+        latihan_kanan.Location = New Point(300, 0)
+        latihan_kanan.Name = "latihan_kanan"
+        latihan_kanan.Size = New Size(862, 607)
+        latihan_kanan.TabIndex = 1
+        ' 
+        ' lblPertanyaan
+        ' 
+        lblPertanyaan.AutoSize = True
+        lblPertanyaan.Location = New Point(137, 135)
+        lblPertanyaan.Name = "lblPertanyaan"
+        lblPertanyaan.Size = New Size(63, 25)
+        lblPertanyaan.TabIndex = 2
+        lblPertanyaan.Text = "Label4"
+        ' 
+        ' btnNext
+        ' 
+        btnNext.Location = New Point(81, 266)
+        btnNext.Name = "btnNext"
+        btnNext.Size = New Size(112, 34)
+        btnNext.TabIndex = 1
+        btnNext.Text = "Button2"
+        btnNext.UseVisualStyleBackColor = True
+        ' 
+        ' btnPrevious
+        ' 
+        btnPrevious.Location = New Point(569, 234)
+        btnPrevious.Name = "btnPrevious"
+        btnPrevious.Size = New Size(112, 34)
+        btnPrevious.TabIndex = 0
+        btnPrevious.Text = "btnPrevious"
+        btnPrevious.UseVisualStyleBackColor = True
+        ' 
+        ' latihan_kiri
+        ' 
+        latihan_kiri.BackColor = Color.IndianRed
+        latihan_kiri.Controls.Add(FlowLayoutPanel1)
+        latihan_kiri.Controls.Add(Panel2)
+        latihan_kiri.Dock = DockStyle.Left
+        latihan_kiri.Location = New Point(0, 0)
+        latihan_kiri.Name = "latihan_kiri"
+        latihan_kiri.Size = New Size(300, 607)
+        latihan_kiri.TabIndex = 0
+        ' 
+        ' FlowLayoutPanel1
+        ' 
+        FlowLayoutPanel1.Dock = DockStyle.Left
+        FlowLayoutPanel1.Location = New Point(0, 150)
+        FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        FlowLayoutPanel1.Size = New Size(300, 457)
+        FlowLayoutPanel1.TabIndex = 1
+        ' 
+        ' Panel2
+        ' 
+        Panel2.Controls.Add(latihan_keluar)
+        Panel2.Controls.Add(Label3)
+        Panel2.Dock = DockStyle.Top
+        Panel2.Location = New Point(0, 0)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(300, 150)
+        Panel2.TabIndex = 0
+        ' 
+        ' latihan_keluar
+        ' 
+        latihan_keluar.Location = New Point(12, 12)
+        latihan_keluar.Name = "latihan_keluar"
+        latihan_keluar.Size = New Size(112, 34)
+        latihan_keluar.TabIndex = 1
+        latihan_keluar.Text = "keluar"
+        latihan_keluar.UseVisualStyleBackColor = True
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Font = New Font("Segoe UI Black", 22F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Location = New Point(55, 52)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(186, 60)
+        Label3.TabIndex = 0
+        Label3.Text = "Latihan"
+        ' 
         ' Belajar
         ' 
-        Belajar.Controls.Add(belajar_default)
         Belajar.Controls.Add(belajar_layout)
+        Belajar.Controls.Add(belajar_default)
         Belajar.Controls.Add(Panel1)
         Belajar.Dock = DockStyle.Fill
         Belajar.Location = New Point(0, 0)
@@ -141,28 +244,10 @@ Partial Class Home
         Belajar.TabIndex = 5
         Belajar.Visible = False
         ' 
-        ' belajar_default
-        ' 
-        belajar_default.Controls.Add(Label2)
-        belajar_default.Dock = DockStyle.Fill
-        belajar_default.Location = New Point(300, 0)
-        belajar_default.Name = "belajar_default"
-        belajar_default.Size = New Size(862, 607)
-        belajar_default.TabIndex = 3
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(197, 27)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(486, 65)
-        Label2.TabIndex = 0
-        Label2.Text = "Silakan Pilih Materi"
-        ' 
         ' belajar_layout
         ' 
         belajar_layout.BackColor = Color.LemonChiffon
+        belajar_layout.Controls.Add(belajar_subJudul)
         belajar_layout.Controls.Add(belajar_isi)
         belajar_layout.Controls.Add(belajar_next)
         belajar_layout.Controls.Add(belajar_previous)
@@ -171,6 +256,16 @@ Partial Class Home
         belajar_layout.Name = "belajar_layout"
         belajar_layout.Size = New Size(862, 607)
         belajar_layout.TabIndex = 1
+        ' 
+        ' belajar_subJudul
+        ' 
+        belajar_subJudul.AutoSize = True
+        belajar_subJudul.Font = New Font("Arial Narrow", 20F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        belajar_subJudul.Location = New Point(362, 42)
+        belajar_subJudul.Name = "belajar_subJudul"
+        belajar_subJudul.Size = New Size(123, 46)
+        belajar_subJudul.TabIndex = 3
+        belajar_subJudul.Text = "Label3"
         ' 
         ' belajar_isi
         ' 
@@ -185,9 +280,9 @@ Partial Class Home
         belajar_text.Location = New Point(3, 3)
         belajar_text.Multiline = True
         belajar_text.Name = "belajar_text"
-        belajar_text.ReadOnly = True
         belajar_text.Size = New Size(150, 46)
         belajar_text.TabIndex = 0
+        belajar_text.Text = "sdsdsd"
         ' 
         ' belajar_next
         ' 
@@ -209,9 +304,29 @@ Partial Class Home
         belajar_previous.TabIndex = 0
         belajar_previous.UseVisualStyleBackColor = True
         ' 
+        ' belajar_default
+        ' 
+        belajar_default.Controls.Add(Label2)
+        belajar_default.Dock = DockStyle.Fill
+        belajar_default.Location = New Point(300, 0)
+        belajar_default.Name = "belajar_default"
+        belajar_default.Size = New Size(862, 607)
+        belajar_default.TabIndex = 3
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(197, 27)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(486, 65)
+        Label2.TabIndex = 0
+        Label2.Text = "Silakan Pilih Materi"
+        ' 
         ' Panel1
         ' 
         Panel1.BackColor = Color.IndianRed
+        Panel1.Controls.Add(belajar_keluar)
         Panel1.Controls.Add(Panel3)
         Panel1.Controls.Add(belajar_flowLayout)
         Panel1.Dock = DockStyle.Left
@@ -219,6 +334,15 @@ Partial Class Home
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(300, 607)
         Panel1.TabIndex = 0
+        ' 
+        ' belajar_keluar
+        ' 
+        belajar_keluar.Location = New Point(12, 561)
+        belajar_keluar.Name = "belajar_keluar"
+        belajar_keluar.Size = New Size(112, 34)
+        belajar_keluar.TabIndex = 1
+        belajar_keluar.Text = "Keluar"
+        belajar_keluar.UseVisualStyleBackColor = True
         ' 
         ' Panel3
         ' 
@@ -241,10 +365,9 @@ Partial Class Home
         ' 
         ' belajar_flowLayout
         ' 
-        belajar_flowLayout.Dock = DockStyle.Bottom
         belajar_flowLayout.Location = New Point(0, 91)
         belajar_flowLayout.Name = "belajar_flowLayout"
-        belajar_flowLayout.Size = New Size(300, 516)
+        belajar_flowLayout.Size = New Size(300, 460)
         belajar_flowLayout.TabIndex = 0
         ' 
         ' Home
@@ -254,8 +377,8 @@ Partial Class Home
         BackgroundImage = My.Resources.Resources.Background
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(1162, 607)
-        Controls.Add(Belajar)
         Controls.Add(Latihan)
+        Controls.Add(Belajar)
         Controls.Add(profile_panel)
         Controls.Add(BackPanel)
         DoubleBuffered = True
@@ -270,12 +393,19 @@ Partial Class Home
         BackPanel.ResumeLayout(False)
         profile_panel.ResumeLayout(False)
         profile_panel.PerformLayout()
+        Latihan.ResumeLayout(False)
+        latihan_kanan.ResumeLayout(False)
+        latihan_kanan.PerformLayout()
+        latihan_kiri.ResumeLayout(False)
+        Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
         Belajar.ResumeLayout(False)
-        belajar_default.ResumeLayout(False)
-        belajar_default.PerformLayout()
         belajar_layout.ResumeLayout(False)
+        belajar_layout.PerformLayout()
         belajar_isi.ResumeLayout(False)
         belajar_isi.PerformLayout()
+        belajar_default.ResumeLayout(False)
+        belajar_default.PerformLayout()
         Panel1.ResumeLayout(False)
         Panel3.ResumeLayout(False)
         Panel3.PerformLayout()
@@ -302,5 +432,16 @@ Partial Class Home
     Friend WithEvents belajar_text As TextBox
     Friend WithEvents belajar_default As Panel
     Friend WithEvents Label2 As Label
+    Friend WithEvents belajar_keluar As Button
+    Friend WithEvents belajar_subJudul As Label
+    Friend WithEvents latihan_kanan As Panel
+    Friend WithEvents latihan_kiri As Panel
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents latihan_keluar As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents btnNext As Button
+    Friend WithEvents btnPrevious As Button
+    Friend WithEvents lblPertanyaan As Label
 
 End Class

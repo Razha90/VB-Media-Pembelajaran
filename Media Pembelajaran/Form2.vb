@@ -2,6 +2,7 @@
 Imports Newtonsoft.Json
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class Dashboard
     Dim conn As New MySqlConnection
@@ -80,6 +81,7 @@ Public Class Dashboard
         Latihan_Container.Visible = False
         Murid_Container.Visible = False
         materi_container_isi.Visible = False
+        container_soal.Visible = False
         If val = 0 Then
             Content_Display.Visible = True
         ElseIf val = 1 Then
@@ -98,6 +100,8 @@ Public Class Dashboard
             Murid_Container.Visible = True
         ElseIf val = 8 Then
             materi_container_isi.Visible = True
+        ElseIf val = 9 Then
+            container_soal.Visible = True
         End If
     End Sub
 
@@ -350,6 +354,7 @@ Public Class Dashboard
             ActivePage(6)
             PannelPosition(6)
             PositionPage = 6
+            refreshLatihanJudul()
         Else
 
         End If
@@ -359,6 +364,7 @@ Public Class Dashboard
             ActivePage(6)
             PannelPosition(6)
             PositionPage = 6
+            refreshLatihanJudul()
         Else
 
         End If
@@ -368,6 +374,7 @@ Public Class Dashboard
             ActivePage(6)
             PannelPosition(6)
             PositionPage = 6
+            refreshLatihanJudul()
         Else
 
         End If
@@ -410,7 +417,7 @@ Public Class Dashboard
         Dim T_Password As String = ""
         Dim T_Pertanyaan As String = ""
         Dim T_Jawaban As String = ""
-        Dim T_Role As String = "Pengajar"
+        Dim T_Role As String = ""
 
         If Daftar_Nama.Text.Length >= 5 AndAlso Daftar_Nama.Text.Length <= 18 Then
             Daftar_Nama.BackColor = Color.PaleGreen
@@ -478,6 +485,9 @@ Public Class Dashboard
 
         If Connector.CheckAdminRole() Then
             T_Role = "Murid"
+        Else
+            T_Role = "Pengajar"
+
         End If
 
         If errorMes.Length > 0 Then
@@ -695,5 +705,164 @@ Public Class Dashboard
         gopage.save_profile = Save_Profile
         gopage.Show()
         Me.Hide()
+    End Sub
+
+    ''' ------------------------------------ Latihan
+
+    Private Sub refreshLatihanJudul()
+        latihan_dataGrid.DataSource = Connector.GetLatihanData()
+        latihan_dataGrid.Columns("id_latihan").Visible = False
+        latihan_dataGrid.AllowUserToAddRows = False
+    End Sub
+
+    Private Sub latihan_segarkan_Click(sender As Object, e As EventArgs) Handles latihan_segarkan.Click
+        refreshLatihanJudul()
+    End Sub
+
+    Private Sub latihan_tambah_Click(sender As Object, e As EventArgs) Handles latihan_tambah.Click
+        If String.IsNullOrEmpty(latihan_judul.Text) Then
+            MessageBox.Show("Judul Masih Kosong!!")
+        Else
+            If Connector.AddLatihanData(latihan_judul.Text) Then
+                refreshLatihanJudul()
+            Else
+                MessageBox.Show("Gagak Menambahkan Judul!!")
+            End If
+        End If
+    End Sub
+
+    Private Sub latihan_perbarui_Click(sender As Object, e As EventArgs) Handles latihan_perbarui.Click
+        ' Mendapatkan nilai dari baris yang dipilih
+        Dim selectedRow As DataGridViewRow = latihan_dataGrid.CurrentRow
+
+        If selectedRow IsNot Nothing Then
+            Dim newValue As String = Convert.ToString(latihan_dataGrid.CurrentCell.Value)
+            Dim id As Integer = Convert.ToInt32(selectedRow.Cells("id_latihan").Value)
+            Dim judul As String = latihan_dataGrid.CurrentCell.OwningColumn.Name
+
+
+            Connector.UpdateLatihanField(id, judul, newValue)
+            refreshLatihanJudul()
+        End If
+
+    End Sub
+
+    Private Sub latihan_hapus_Click(sender As Object, e As EventArgs) Handles latihan_hapus.Click
+        Dim selectedRow As DataGridViewRow = latihan_dataGrid.CurrentRow
+
+        If selectedRow IsNot Nothing Then
+            Dim idLatihan As Integer = Convert.ToInt32(selectedRow.Cells("id_latihan").Value)
+
+            ' Konfirmasi penghapusan (opsional)
+            Dim confirmationResult As DialogResult = MessageBox.Show("Apakah Anda yakin ingin menghapus data terpilih?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+            If confirmationResult = DialogResult.Yes Then
+                Connector.DeleteLatihan(idLatihan)
+
+                refreshLatihanJudul()
+            End If
+        Else
+            MessageBox.Show("Pilih baris terlebih dahulu untuk dihapus.")
+        End If
+    End Sub
+
+    Private Sub latihan_soal_Click(sender As Object, e As EventArgs) Handles latihan_soal.Click
+        soal_jawaban.DropDownStyle = ComboBoxStyle.DropDownList
+        soal_jawaban.Items.Add("pilihan_1")
+        soal_jawaban.Items.Add("pilihan_2")
+        soal_jawaban.Items.Add("pilihan_3")
+        soal_jawaban.Items.Add("pilihan_4")
+
+        soal_list.DataSource = Connector.GetLatihanTitles()
+        soal_list.DropDownStyle = ComboBoxStyle.DropDownList
+
+        If PositionPage <> 9 Then
+            PannelPosition(9)
+            PositionPage = 9
+        Else
+
+        End If
+    End Sub
+
+    Private Sub latihan_back_Click(sender As Object, e As EventArgs) Handles latihan_back.Click
+        If PositionPage <> 6 Then
+            ActivePage(6)
+            PannelPosition(6)
+            PositionPage = 6
+            refreshLatihanJudul()
+        Else
+
+        End If
+    End Sub
+
+    Private Sub soal_add_Click(sender As Object, e As EventArgs) Handles soal_add.Click
+        If Not String.IsNullOrWhiteSpace(soal_soal.Text) AndAlso
+    Not String.IsNullOrWhiteSpace(soal_a.Text) AndAlso
+    Not String.IsNullOrWhiteSpace(soal_b.Text) AndAlso
+        Not String.IsNullOrWhiteSpace(soal_c.Text) AndAlso
+        Not String.IsNullOrWhiteSpace(soal_jawaban.Text) AndAlso
+        Not String.IsNullOrWhiteSpace(soal_d.Text) Then
+            Dim val As Integer = Connector.GetSelectedLatihanID(soal_list.Text)
+
+            If Connector.InsertNewSoal(soal_soal.Text, soal_a.Text, soal_b.Text, soal_c.Text, soal_d.Text, soal_jawaban.Text, Val) Then
+                refresh_Latihan()
+            Else
+                MessageBox.Show("Gagal Memasukkan Data")
+
+            End If
+        Else
+            MessageBox.Show("Semua TextBox harus diisi. Silakan lengkapi data.")
+        End If
+    End Sub
+
+    Private Sub refresh_Latihan()
+        Dim val As Integer = Connector.GetSelectedLatihanID(soal_list.Text)
+        soal_dataGrid.DataSource = Connector.GetSoalDataByLatihanID(val)
+        soal_dataGrid.Columns("id_soal").Visible = False
+        soal_dataGrid.Columns("id_latihan").Visible = False
+        soal_dataGrid.AllowUserToAddRows = False
+    End Sub
+
+    Private Sub soal_refresh_Click(sender As Object, e As EventArgs) Handles soal_refresh.Click
+        If soal_list.Text = "" Then
+            MessageBox.Show("Harap Pilih Latihan!")
+        Else
+            refresh_Latihan()
+        End If
+    End Sub
+
+    Private Sub soal_hapus_Click(sender As Object, e As EventArgs) Handles soal_hapus.Click
+        Dim selectedRow As DataGridViewRow = soal_dataGrid.CurrentRow
+
+        If selectedRow IsNot Nothing Then
+            Dim idSoal As Integer = Convert.ToInt32(selectedRow.Cells("id_soal").Value)
+            Connector.DeleteSoal(idSoal)
+            refresh_Latihan()
+        Else
+            MessageBox.Show("Pilih soal yang akan dihapus.")
+        End If
+    End Sub
+
+    Private Sub soal_update_Click(sender As Object, e As EventArgs) Handles soal_update.Click
+        Dim selectedRow As DataGridViewRow = soal_dataGrid.CurrentRow
+
+        If selectedRow IsNot Nothing Then
+            Dim idSoal As Integer = Convert.ToInt32(selectedRow.Cells("id_soal").Value)
+            Dim pertanyaan As String = selectedRow.Cells("pertanyaan").Value.ToString()
+            Dim pilihan1 As String = selectedRow.Cells("pilihan_1").Value.ToString()
+            Dim pilihan2 As String = selectedRow.Cells("pilihan_2").Value.ToString()
+            Dim pilihan3 As String = selectedRow.Cells("pilihan_3").Value.ToString()
+            Dim pilihan4 As String = selectedRow.Cells("pilihan_4").Value.ToString()
+            Dim jawaban As String = selectedRow.Cells("jawaban").Value.ToString()
+            Dim idLatihan As Integer = selectedRow.Cells("id_latihan").Value.ToString()
+
+            ' Memperbarui data soal dalam database
+            Connector.UpdateSoal(idSoal, pertanyaan, pilihan1, pilihan2, pilihan3, pilihan4, jawaban, idLatihan)
+
+            ' Memperbarui DataGridView setelah pembaruan
+            refresh_Latihan()
+        Else
+            MessageBox.Show("Pilih soal yang akan diperbarui.")
+        End If
     End Sub
 End Class

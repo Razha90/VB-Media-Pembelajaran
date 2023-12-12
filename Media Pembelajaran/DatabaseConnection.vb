@@ -3,6 +3,7 @@ Imports MySql.Data.MySqlClient
 Imports Mysqlx
 Imports Newtonsoft.Json
 Imports BCrypt
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class DatabaseConnection
     Dim conn As New MySqlConnection
@@ -258,11 +259,11 @@ CREATE TABLE IF NOT EXISTS selesai_latihan (
         Try
             conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
             conn.Open()
-            Dim query As String = "SELECT COUNT(*) FROM akun WHERE Role = 'Pengajar'"
+            Dim query As String = "SELECT COUNT(*) FROM akun WHERE roles = 'Pengajar'"
             Dim command As New MySqlCommand(query, conn)
 
             Dim adminCount As Integer = Convert.ToInt32(command.ExecuteScalar())
-
+            MessageBox.Show(adminCount > 0)
             Return adminCount > 0
         Catch ex As Exception
             Return False
@@ -485,6 +486,227 @@ CREATE TABLE IF NOT EXISTS selesai_latihan (
             conn.Close()
         End Try
     End Function
+
+    ''' ----------------------------------------------------------------
+
+    Public Function GetLatihanData() As DataTable
+        Dim dataTable As New DataTable()
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim query As String = "SELECT * FROM latihan"
+            Dim adapter As New MySqlDataAdapter(query, conn)
+            adapter.Fill(dataTable)
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+        Return dataTable
+    End Function
+
+    Public Function AddLatihanData(Judul As String)
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim key As Integer = GenerateUniqueNumericKey("latihan", "id_latihan")
+            Dim query As String = "INSERT INTO latihan (id_latihan, judul) VALUES (@id_latihan, @judul)"
+            Dim cmd As New MySqlCommand(query, conn)
+            cmd.Parameters.AddWithValue("@id_latihan", key)
+            cmd.Parameters.AddWithValue("@judul", Judul)
+
+            cmd.ExecuteNonQuery()
+            Return True
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+            Return False
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+
+    Public Sub UpdateLatihanField(idLatihan As Integer, fieldName As String, newValue As String)
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = $"UPDATE latihan SET {fieldName} = @newValue WHERE id_latihan = @idLatihan"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idLatihan", idLatihan)
+                command.Parameters.AddWithValue("@newValue", newValue)
+                command.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
+
+    Public Sub DeleteLatihan(idLatihan As Integer)
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "DELETE FROM latihan WHERE id_latihan = @idLatihan"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idLatihan", idLatihan)
+                command.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
+    Public Function GetLatihanTitles() As List(Of String)
+        Dim titles As New List(Of String)
+
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "SELECT judul FROM latihan"
+            Using command As New MySqlCommand(query, conn)
+                Using reader As MySqlDataReader = command.ExecuteReader()
+                    While reader.Read()
+                        titles.Add(reader("judul").ToString())
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+
+        Return titles
+    End Function
+
+    Public Function GetSoalDataByLatihanID(latihanID As Integer) As DataTable
+        Dim dataTable As New DataTable()
+
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+
+            conn.Open()
+
+            Dim query As String = "SELECT * FROM soal WHERE id_latihan = @latihanID"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@latihanID", latihanID)
+
+                Using adapter As New MySqlDataAdapter(command)
+                    adapter.Fill(dataTable)
+                End Using
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+
+        Return dataTable
+    End Function
+
+    Public Function GetSelectedLatihanID(selectedTitle As String) As Integer
+        Dim selectedLatihanID As Integer = 0
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+
+            conn.Open()
+
+            Dim query As String = "SELECT id_latihan FROM latihan WHERE judul = @judul"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@judul", selectedTitle)
+                Dim result As Object = command.ExecuteScalar()
+
+                If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
+                    selectedLatihanID = Convert.ToInt32(result)
+                End If
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+
+        Return selectedLatihanID
+    End Function
+
+
+    Public Function InsertNewSoal(pertanyaan As String, pilihan1 As String, pilihan2 As String, pilihan3 As String, pilihan4 As String, jawaban As String, idLatihan As Integer) As Boolean
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+            Dim key As Integer = GenerateUniqueNumericKey("soal", "id_soal")
+
+            Dim query As String = "INSERT INTO soal (id_soal, pertanyaan, pilihan_1, pilihan_2, pilihan_3, pilihan_4, jawaban, id_latihan) VALUES (@id_soal,@pertanyaan, @pilihan1, @pilihan2, @pilihan3, @pilihan4, @jawaban, @idLatihan)"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@id_soal", key)
+                command.Parameters.AddWithValue("@pertanyaan", pertanyaan)
+                command.Parameters.AddWithValue("@pilihan1", pilihan1)
+                command.Parameters.AddWithValue("@pilihan2", pilihan2)
+                command.Parameters.AddWithValue("@pilihan3", pilihan3)
+                command.Parameters.AddWithValue("@pilihan4", pilihan4)
+                command.Parameters.AddWithValue("@jawaban", jawaban)
+                command.Parameters.AddWithValue("@idLatihan", idLatihan)
+
+                command.ExecuteNonQuery()
+            End Using
+            Return True
+        Catch ex As Exception
+            Return False
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+    End Function
+
+    Public Sub DeleteSoal(idSoal As Integer)
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "DELETE FROM soal WHERE id_soal = @idSoal"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idSoal", idSoal)
+
+                command.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
+    Public Sub UpdateSoal(idSoal As Integer, pertanyaan As String, pilihan1 As String, pilihan2 As String, pilihan3 As String, pilihan4 As String, jawaban As String, idLatihan As Integer)
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "UPDATE soal SET pertanyaan = @pertanyaan, pilihan_1 = @pilihan1, pilihan_2 = @pilihan2, pilihan_3 = @pilihan3, pilihan_4 = @pilihan4, jawaban = @jawaban, id_latihan = @idLatihan WHERE id_soal = @idSoal"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@pertanyaan", pertanyaan)
+                command.Parameters.AddWithValue("@pilihan1", pilihan1)
+                command.Parameters.AddWithValue("@pilihan2", pilihan2)
+                command.Parameters.AddWithValue("@pilihan3", pilihan3)
+                command.Parameters.AddWithValue("@pilihan4", pilihan4)
+                command.Parameters.AddWithValue("@jawaban", jawaban)
+                command.Parameters.AddWithValue("@idLatihan", idLatihan)
+                command.Parameters.AddWithValue("@idSoal", idSoal)
+
+                command.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 
     Private Function GenerateUniqueNumericKey(dbname As String, dbid As String) As Integer
         Dim random As New Random()

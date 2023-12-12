@@ -99,6 +99,8 @@ Partial Class Dashboard
         Daftar_Nama = New TextBox()
         Label7 = New Label()
         Profile_Container = New Panel()
+        profile_gopage = New Button()
+        Label6 = New Label()
         Materi_Container = New Panel()
         materi_hapus = New Button()
         materi_isi = New Button()
@@ -109,7 +111,36 @@ Partial Class Dashboard
         materi_getdata = New Button()
         dgMateri = New DataGridView()
         Latihan_Container = New Panel()
+        latihan_tambah = New Button()
+        Label24 = New Label()
+        latihan_judul = New TextBox()
+        latihan_soal = New Button()
+        latihan_hapus = New Button()
+        latihan_perbarui = New Button()
+        latihan_segarkan = New Button()
+        latihan_dataGrid = New DataGridView()
         Label4 = New Label()
+        container_soal = New Panel()
+        soal_list = New ComboBox()
+        soal_jawaban = New ComboBox()
+        Label30 = New Label()
+        latihan_back = New Button()
+        soal_add = New Button()
+        soal_d = New TextBox()
+        soal_c = New TextBox()
+        soal_b = New TextBox()
+        soal_a = New TextBox()
+        Label31 = New Label()
+        Label29 = New Label()
+        Label28 = New Label()
+        Label27 = New Label()
+        soal_soal = New TextBox()
+        Label26 = New Label()
+        soal_hapus = New Button()
+        soal_update = New Button()
+        soal_refresh = New Button()
+        soal_dataGrid = New DataGridView()
+        Label25 = New Label()
         Murid_Container = New Panel()
         Label3 = New Label()
         materi_container_isi = New Panel()
@@ -130,8 +161,6 @@ Partial Class Dashboard
         materi_isi_tem = New Button()
         dgIsiMateri = New DataGridView()
         Label19 = New Label()
-        Label6 = New Label()
-        profile_gopage = New Button()
         Panel1.SuspendLayout()
         Flow_Menu.SuspendLayout()
         Login.SuspendLayout()
@@ -149,6 +178,9 @@ Partial Class Dashboard
         Materi_Container.SuspendLayout()
         CType(dgMateri, ComponentModel.ISupportInitialize).BeginInit()
         Latihan_Container.SuspendLayout()
+        CType(latihan_dataGrid, ComponentModel.ISupportInitialize).BeginInit()
+        container_soal.SuspendLayout()
+        CType(soal_dataGrid, ComponentModel.ISupportInitialize).BeginInit()
         Murid_Container.SuspendLayout()
         materi_container_isi.SuspendLayout()
         Panel3.SuspendLayout()
@@ -966,6 +998,25 @@ Partial Class Dashboard
         Profile_Container.Size = New Size(865, 744)
         Profile_Container.TabIndex = 0
         ' 
+        ' profile_gopage
+        ' 
+        profile_gopage.Location = New Point(347, 608)
+        profile_gopage.Name = "profile_gopage"
+        profile_gopage.Size = New Size(124, 73)
+        profile_gopage.TabIndex = 2
+        profile_gopage.Text = "Masuk Menu Latihan"
+        profile_gopage.UseVisualStyleBackColor = True
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.Location = New Point(325, 0)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(188, 65)
+        Label6.TabIndex = 1
+        Label6.Text = "Profile"
+        ' 
         ' Materi_Container
         ' 
         Materi_Container.Controls.Add(materi_hapus)
@@ -1058,6 +1109,14 @@ Partial Class Dashboard
         ' 
         ' Latihan_Container
         ' 
+        Latihan_Container.Controls.Add(latihan_tambah)
+        Latihan_Container.Controls.Add(Label24)
+        Latihan_Container.Controls.Add(latihan_judul)
+        Latihan_Container.Controls.Add(latihan_soal)
+        Latihan_Container.Controls.Add(latihan_hapus)
+        Latihan_Container.Controls.Add(latihan_perbarui)
+        Latihan_Container.Controls.Add(latihan_segarkan)
+        Latihan_Container.Controls.Add(latihan_dataGrid)
         Latihan_Container.Controls.Add(Label4)
         Latihan_Container.Dock = DockStyle.Fill
         Latihan_Container.Location = New Point(223, 0)
@@ -1065,14 +1124,286 @@ Partial Class Dashboard
         Latihan_Container.Size = New Size(865, 744)
         Latihan_Container.TabIndex = 0
         ' 
+        ' latihan_tambah
+        ' 
+        latihan_tambah.Location = New Point(350, 495)
+        latihan_tambah.Name = "latihan_tambah"
+        latihan_tambah.Size = New Size(173, 46)
+        latihan_tambah.TabIndex = 9
+        latihan_tambah.Text = "Tambahkan Judul"
+        latihan_tambah.UseVisualStyleBackColor = True
+        ' 
+        ' Label24
+        ' 
+        Label24.AutoSize = True
+        Label24.Location = New Point(39, 436)
+        Label24.Name = "Label24"
+        Label24.Size = New Size(123, 25)
+        Label24.TabIndex = 8
+        Label24.Text = "Judul Latihan :"
+        ' 
+        ' latihan_judul
+        ' 
+        latihan_judul.Location = New Point(172, 436)
+        latihan_judul.Name = "latihan_judul"
+        latihan_judul.Size = New Size(649, 31)
+        latihan_judul.TabIndex = 7
+        ' 
+        ' latihan_soal
+        ' 
+        latihan_soal.BackColor = Color.IndianRed
+        latihan_soal.ForeColor = SystemColors.Control
+        latihan_soal.Location = New Point(721, 671)
+        latihan_soal.Name = "latihan_soal"
+        latihan_soal.Size = New Size(112, 48)
+        latihan_soal.TabIndex = 6
+        latihan_soal.Text = "Soal"
+        latihan_soal.UseVisualStyleBackColor = False
+        ' 
+        ' latihan_hapus
+        ' 
+        latihan_hapus.Location = New Point(584, 99)
+        latihan_hapus.Name = "latihan_hapus"
+        latihan_hapus.Size = New Size(112, 39)
+        latihan_hapus.TabIndex = 5
+        latihan_hapus.Text = "Hapus"
+        latihan_hapus.UseVisualStyleBackColor = True
+        ' 
+        ' latihan_perbarui
+        ' 
+        latihan_perbarui.Location = New Point(712, 97)
+        latihan_perbarui.Name = "latihan_perbarui"
+        latihan_perbarui.Size = New Size(112, 39)
+        latihan_perbarui.TabIndex = 4
+        latihan_perbarui.Text = "Tambahkan"
+        latihan_perbarui.UseVisualStyleBackColor = True
+        ' 
+        ' latihan_segarkan
+        ' 
+        latihan_segarkan.Location = New Point(36, 93)
+        latihan_segarkan.Name = "latihan_segarkan"
+        latihan_segarkan.Size = New Size(112, 45)
+        latihan_segarkan.TabIndex = 3
+        latihan_segarkan.Text = "Segarkan"
+        latihan_segarkan.UseVisualStyleBackColor = True
+        ' 
+        ' latihan_dataGrid
+        ' 
+        latihan_dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        latihan_dataGrid.Location = New Point(39, 139)
+        latihan_dataGrid.Name = "latihan_dataGrid"
+        latihan_dataGrid.RowHeadersWidth = 62
+        latihan_dataGrid.Size = New Size(785, 259)
+        latihan_dataGrid.TabIndex = 2
+        ' 
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(403, 360)
+        Label4.Font = New Font("Segoe UI Black", 22F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.Location = New Point(320, 25)
         Label4.Name = "Label4"
-        Label4.Size = New Size(68, 25)
+        Label4.Size = New Size(186, 60)
         Label4.TabIndex = 1
         Label4.Text = "Latihan"
+        ' 
+        ' container_soal
+        ' 
+        container_soal.Controls.Add(soal_list)
+        container_soal.Controls.Add(soal_jawaban)
+        container_soal.Controls.Add(Label30)
+        container_soal.Controls.Add(latihan_back)
+        container_soal.Controls.Add(soal_add)
+        container_soal.Controls.Add(soal_d)
+        container_soal.Controls.Add(soal_c)
+        container_soal.Controls.Add(soal_b)
+        container_soal.Controls.Add(soal_a)
+        container_soal.Controls.Add(Label31)
+        container_soal.Controls.Add(Label29)
+        container_soal.Controls.Add(Label28)
+        container_soal.Controls.Add(Label27)
+        container_soal.Controls.Add(soal_soal)
+        container_soal.Controls.Add(Label26)
+        container_soal.Controls.Add(soal_hapus)
+        container_soal.Controls.Add(soal_update)
+        container_soal.Controls.Add(soal_refresh)
+        container_soal.Controls.Add(soal_dataGrid)
+        container_soal.Controls.Add(Label25)
+        container_soal.Dock = DockStyle.Fill
+        container_soal.Location = New Point(223, 0)
+        container_soal.Name = "container_soal"
+        container_soal.Size = New Size(865, 744)
+        container_soal.TabIndex = 10
+        ' 
+        ' soal_list
+        ' 
+        soal_list.FormattingEnabled = True
+        soal_list.Location = New Point(39, 99)
+        soal_list.Name = "soal_list"
+        soal_list.Size = New Size(182, 33)
+        soal_list.TabIndex = 20
+        ' 
+        ' soal_jawaban
+        ' 
+        soal_jawaban.FormattingEnabled = True
+        soal_jawaban.Location = New Point(152, 603)
+        soal_jawaban.Name = "soal_jawaban"
+        soal_jawaban.Size = New Size(182, 33)
+        soal_jawaban.TabIndex = 19
+        ' 
+        ' Label30
+        ' 
+        Label30.AutoSize = True
+        Label30.Location = New Point(14, 607)
+        Label30.Name = "Label30"
+        Label30.Size = New Size(132, 25)
+        Label30.TabIndex = 18
+        Label30.Text = "Jawaban Benar:"
+        ' 
+        ' latihan_back
+        ' 
+        latihan_back.Location = New Point(23, 698)
+        latihan_back.Name = "latihan_back"
+        latihan_back.Size = New Size(112, 34)
+        latihan_back.TabIndex = 17
+        latihan_back.Text = "Latihan"
+        latihan_back.UseVisualStyleBackColor = True
+        ' 
+        ' soal_add
+        ' 
+        soal_add.Location = New Point(347, 651)
+        soal_add.Name = "soal_add"
+        soal_add.Size = New Size(154, 54)
+        soal_add.TabIndex = 16
+        soal_add.Text = "Tambahkan Soal"
+        soal_add.UseVisualStyleBackColor = True
+        ' 
+        ' soal_d
+        ' 
+        soal_d.Location = New Point(650, 569)
+        soal_d.Name = "soal_d"
+        soal_d.Size = New Size(203, 31)
+        soal_d.TabIndex = 15
+        ' 
+        ' soal_c
+        ' 
+        soal_c.Location = New Point(429, 569)
+        soal_c.Name = "soal_c"
+        soal_c.Size = New Size(215, 31)
+        soal_c.TabIndex = 14
+        ' 
+        ' soal_b
+        ' 
+        soal_b.Location = New Point(205, 569)
+        soal_b.Name = "soal_b"
+        soal_b.Size = New Size(212, 31)
+        soal_b.TabIndex = 13
+        ' 
+        ' soal_a
+        ' 
+        soal_a.Location = New Point(12, 569)
+        soal_a.Name = "soal_a"
+        soal_a.Size = New Size(181, 31)
+        soal_a.TabIndex = 12
+        ' 
+        ' Label31
+        ' 
+        Label31.AutoSize = True
+        Label31.Location = New Point(702, 533)
+        Label31.Name = "Label31"
+        Label31.Size = New Size(116, 25)
+        Label31.TabIndex = 11
+        Label31.Text = "Pertanyaan D"
+        ' 
+        ' Label29
+        ' 
+        Label29.AutoSize = True
+        Label29.Location = New Point(480, 533)
+        Label29.Name = "Label29"
+        Label29.Size = New Size(114, 25)
+        Label29.TabIndex = 9
+        Label29.Text = "Pertanyaan C"
+        ' 
+        ' Label28
+        ' 
+        Label28.AutoSize = True
+        Label28.Location = New Point(247, 533)
+        Label28.Name = "Label28"
+        Label28.Size = New Size(113, 25)
+        Label28.TabIndex = 8
+        Label28.Text = "Pertanyaan B"
+        ' 
+        ' Label27
+        ' 
+        Label27.AutoSize = True
+        Label27.Location = New Point(45, 533)
+        Label27.Name = "Label27"
+        Label27.Size = New Size(115, 25)
+        Label27.TabIndex = 7
+        Label27.Text = "Pertanyaan A"
+        ' 
+        ' soal_soal
+        ' 
+        soal_soal.BorderStyle = BorderStyle.FixedSingle
+        soal_soal.Location = New Point(106, 396)
+        soal_soal.Multiline = True
+        soal_soal.Name = "soal_soal"
+        soal_soal.Size = New Size(708, 111)
+        soal_soal.TabIndex = 6
+        ' 
+        ' Label26
+        ' 
+        Label26.AutoSize = True
+        Label26.Location = New Point(45, 401)
+        Label26.Name = "Label26"
+        Label26.Size = New Size(55, 25)
+        Label26.TabIndex = 5
+        Label26.Text = "Soal :"
+        ' 
+        ' soal_hapus
+        ' 
+        soal_hapus.Location = New Point(581, 96)
+        soal_hapus.Name = "soal_hapus"
+        soal_hapus.Size = New Size(112, 40)
+        soal_hapus.TabIndex = 4
+        soal_hapus.Text = "Hapus"
+        soal_hapus.UseVisualStyleBackColor = True
+        ' 
+        ' soal_update
+        ' 
+        soal_update.Location = New Point(702, 93)
+        soal_update.Name = "soal_update"
+        soal_update.Size = New Size(112, 45)
+        soal_update.TabIndex = 3
+        soal_update.Text = "Perbaharui"
+        soal_update.UseVisualStyleBackColor = True
+        ' 
+        ' soal_refresh
+        ' 
+        soal_refresh.Location = New Point(228, 88)
+        soal_refresh.Name = "soal_refresh"
+        soal_refresh.Size = New Size(112, 45)
+        soal_refresh.TabIndex = 2
+        soal_refresh.Text = "Temukan"
+        soal_refresh.UseVisualStyleBackColor = True
+        ' 
+        ' soal_dataGrid
+        ' 
+        soal_dataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        soal_dataGrid.Location = New Point(45, 139)
+        soal_dataGrid.Name = "soal_dataGrid"
+        soal_dataGrid.RowHeadersWidth = 62
+        soal_dataGrid.Size = New Size(769, 225)
+        soal_dataGrid.TabIndex = 1
+        ' 
+        ' Label25
+        ' 
+        Label25.AutoSize = True
+        Label25.Font = New Font("Segoe UI", 22F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label25.Location = New Point(299, 10)
+        Label25.Name = "Label25"
+        Label25.Size = New Size(260, 60)
+        Label25.TabIndex = 0
+        Label25.Text = "Soal Latihan"
         ' 
         ' Murid_Container
         ' 
@@ -1265,37 +1596,19 @@ Partial Class Dashboard
         Label19.TabIndex = 0
         Label19.Text = "Isi Materi"
         ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(325, 0)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(188, 65)
-        Label6.TabIndex = 1
-        Label6.Text = "Profile"
-        ' 
-        ' profile_gopage
-        ' 
-        profile_gopage.Location = New Point(347, 608)
-        profile_gopage.Name = "profile_gopage"
-        profile_gopage.Size = New Size(124, 73)
-        profile_gopage.TabIndex = 2
-        profile_gopage.Text = "Masuk Menu Latihan"
-        profile_gopage.UseVisualStyleBackColor = True
-        ' 
         ' Dashboard
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1088, 744)
+        Controls.Add(container_soal)
+        Controls.Add(Latihan_Container)
         Controls.Add(Profile_Container)
         Controls.Add(materi_container_isi)
         Controls.Add(Materi_Container)
         Controls.Add(Database_Container)
         Controls.Add(Login_Container)
         Controls.Add(Daftar_Container)
-        Controls.Add(Latihan_Container)
         Controls.Add(Murid_Container)
         Controls.Add(Content_Display)
         Controls.Add(Panel1)
@@ -1336,6 +1649,10 @@ Partial Class Dashboard
         CType(dgMateri, ComponentModel.ISupportInitialize).EndInit()
         Latihan_Container.ResumeLayout(False)
         Latihan_Container.PerformLayout()
+        CType(latihan_dataGrid, ComponentModel.ISupportInitialize).EndInit()
+        container_soal.ResumeLayout(False)
+        container_soal.PerformLayout()
+        CType(soal_dataGrid, ComponentModel.ISupportInitialize).EndInit()
         Murid_Container.ResumeLayout(False)
         Murid_Container.PerformLayout()
         materi_container_isi.ResumeLayout(False)
@@ -1456,4 +1773,33 @@ Partial Class Dashboard
     Friend WithEvents Label23 As Label
     Friend WithEvents profile_gopage As Button
     Friend WithEvents Label6 As Label
+    Friend WithEvents latihan_soal As Button
+    Friend WithEvents latihan_hapus As Button
+    Friend WithEvents latihan_perbarui As Button
+    Friend WithEvents latihan_segarkan As Button
+    Friend WithEvents latihan_dataGrid As DataGridView
+    Friend WithEvents Label24 As Label
+    Friend WithEvents latihan_judul As TextBox
+    Friend WithEvents latihan_tambah As Button
+    Friend WithEvents container_soal As Panel
+    Friend WithEvents Label25 As Label
+    Friend WithEvents soal_hapus As Button
+    Friend WithEvents soal_update As Button
+    Friend WithEvents soal_refresh As Button
+    Friend WithEvents soal_dataGrid As DataGridView
+    Friend WithEvents latihan_back As Button
+    Friend WithEvents soal_add As Button
+    Friend WithEvents soal_d As TextBox
+    Friend WithEvents soal_c As TextBox
+    Friend WithEvents soal_b As TextBox
+    Friend WithEvents soal_a As TextBox
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents soal_soal As TextBox
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents soal_jawaban As ComboBox
+    Friend WithEvents soal_list As ComboBox
 End Class

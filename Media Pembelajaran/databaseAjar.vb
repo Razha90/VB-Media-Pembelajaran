@@ -86,7 +86,135 @@ Public Class databaseAjar
 
         Return isiMateriList
     End Function
+
+    Public Function InsertIntoSelesaiMateri(idMateri As Integer, idAkun As Integer)
+        Using conn As New MySqlConnection($"server={Server};port={Port};database={Database};userid={UserId};password={Password}")
+            Try
+                conn.Open()
+                Dim query As String = "INSERT INTO selesai_materi (id_materi, id_akun) VALUES (@idMateri, @idAkun)"
+                Using command As New MySqlCommand(query, conn)
+                    command.Parameters.AddWithValue("@idMateri", idMateri)
+                    command.Parameters.AddWithValue("@idAkun", idAkun)
+                    command.ExecuteNonQuery()
+                End Using
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End Using
+    End Function
+
+    Public Function GetLatihanTitles() As List(Of String)
+        Dim titles As New List(Of String)
+
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "SELECT judul FROM latihan"
+            Using command As New MySqlCommand(query, conn)
+                Using reader As MySqlDataReader = command.ExecuteReader()
+                    While reader.Read()
+                        titles.Add(reader("judul").ToString())
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+
+        Return titles
+    End Function
+
+
+    Public Function GetLatihanIdByJudul(judul As String) As Integer
+        Dim idLatihan As Integer = -1
+
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "SELECT id_latihan FROM latihan WHERE judul = @judul"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@judul", judul)
+
+                Dim result As Object = command.ExecuteScalar()
+                If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
+                    idLatihan = Convert.ToInt32(result)
+                End If
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+
+        Return idLatihan
+    End Function
+
+
+
+    Public Function GetLatihanIdByTitle(judul As String) As Integer
+        Dim idLatihan As Integer = -1
+
+        ' Kode untuk melakukan query ke database dan mendapatkan ID latihan
+        ' Gantilah bagian ini sesuai dengan struktur database Anda
+        conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+        Dim query As String = "SELECT id_latihan FROM latihan WHERE judul = @judul"
+        Using command As New MySqlCommand(query, conn)
+            command.Parameters.AddWithValue("@judul", judul)
+            conn.Open()
+
+            Dim result As Object = command.ExecuteScalar()
+            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                idLatihan = Convert.ToInt32(result)
+            End If
+        End Using
+
+        Return idLatihan
+    End Function
+
+    Public Function GetSoalData(idLatihan As Integer) As List(Of Soal)
+        Dim soals As New List(Of Soal)()
+
+        Try
+            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
+            conn.Open()
+
+            Dim query As String = "SELECT * FROM soal WHERE id_latihan = @idLatihan"
+            Using command As New MySqlCommand(query, conn)
+                command.Parameters.AddWithValue("@idLatihan", idLatihan)
+
+                Using reader As MySqlDataReader = command.ExecuteReader()
+                    While reader.Read()
+                        Dim soal As New Soal() With {
+                        .IdSoal = Convert.ToInt32(reader("id_soal")),
+                        .Pertanyaan = reader("pertanyaan").ToString(),
+                        .Pilihan1 = reader("pilihan_1").ToString(),
+                        .Pilihan2 = reader("pilihan_2").ToString(),
+                        .Pilihan3 = reader("pilihan_3").ToString(),
+                        .Pilihan4 = reader("pilihan_4").ToString(),
+                        .Jawaban = reader("jawaban").ToString()
+                    }
+                        soals.Add(soal)
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            Console.WriteLine($"Error: {ex.Message}")
+        Finally
+            conn.Close()
+        End Try
+
+        Return soals
+    End Function
+
+
 End Class
+
+
 
 Public Class IsiMateri
     Public Property IdIsi As Long
@@ -94,4 +222,15 @@ Public Class IsiMateri
     Public Property Page As Integer
     Public Property Isi As String
     Public Property Video As String
+End Class
+
+Public Class Soal
+    Public Property IdSoal As Integer
+    Public Property Pertanyaan As String
+    Public Property Pilihan1 As String
+    Public Property Pilihan2 As String
+    Public Property Pilihan3 As String
+    Public Property Pilihan4 As String
+    Public Property Jawaban As String
+    Public Property IdLatihan As Integer
 End Class
