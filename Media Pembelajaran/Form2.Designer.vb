@@ -71,7 +71,6 @@ Partial Class Dashboard
         DC_L_Server = New Label()
         DC_Title = New Label()
         Content_Display = New Panel()
-        Label2 = New Label()
         Login_Container = New Panel()
         Label11 = New Label()
         Login_Button = New Button()
@@ -99,6 +98,11 @@ Partial Class Dashboard
         Daftar_Nama = New TextBox()
         Label7 = New Label()
         Profile_Container = New Panel()
+        Logout = New Button()
+        profile_roles = New Label()
+        profile_email = New Label()
+        profile_name = New Label()
+        Label2 = New Label()
         profile_gopage = New Button()
         Label6 = New Label()
         Materi_Container = New Panel()
@@ -171,7 +175,6 @@ Partial Class Dashboard
         Latihan.SuspendLayout()
         Murid.SuspendLayout()
         Database_Container.SuspendLayout()
-        Content_Display.SuspendLayout()
         Login_Container.SuspendLayout()
         Daftar_Container.SuspendLayout()
         Profile_Container.SuspendLayout()
@@ -705,21 +708,13 @@ Partial Class Dashboard
         ' 
         ' Content_Display
         ' 
-        Content_Display.Controls.Add(Label2)
+        Content_Display.BackgroundImage = My.Resources.Resources.bg_aplikasi
+        Content_Display.BackgroundImageLayout = ImageLayout.Stretch
         Content_Display.Dock = DockStyle.Fill
         Content_Display.Location = New Point(223, 0)
         Content_Display.Name = "Content_Display"
         Content_Display.Size = New Size(865, 744)
         Content_Display.TabIndex = 11
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Location = New Point(261, 70)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(63, 25)
-        Label2.TabIndex = 0
-        Label2.Text = "Label2"
         ' 
         ' Login_Container
         ' 
@@ -990,6 +985,11 @@ Partial Class Dashboard
         ' 
         ' Profile_Container
         ' 
+        Profile_Container.Controls.Add(Logout)
+        Profile_Container.Controls.Add(profile_roles)
+        Profile_Container.Controls.Add(profile_email)
+        Profile_Container.Controls.Add(profile_name)
+        Profile_Container.Controls.Add(Label2)
         Profile_Container.Controls.Add(profile_gopage)
         Profile_Container.Controls.Add(Label6)
         Profile_Container.Dock = DockStyle.Fill
@@ -997,6 +997,50 @@ Partial Class Dashboard
         Profile_Container.Name = "Profile_Container"
         Profile_Container.Size = New Size(865, 744)
         Profile_Container.TabIndex = 0
+        ' 
+        ' Logout
+        ' 
+        Logout.Location = New Point(60, 300)
+        Logout.Name = "Logout"
+        Logout.Size = New Size(112, 39)
+        Logout.TabIndex = 7
+        Logout.Text = "Logout"
+        Logout.UseVisualStyleBackColor = True
+        ' 
+        ' profile_roles
+        ' 
+        profile_roles.AutoSize = True
+        profile_roles.Location = New Point(60, 219)
+        profile_roles.Name = "profile_roles"
+        profile_roles.Size = New Size(73, 25)
+        profile_roles.TabIndex = 6
+        profile_roles.Text = "Label32"
+        ' 
+        ' profile_email
+        ' 
+        profile_email.AutoSize = True
+        profile_email.Location = New Point(58, 173)
+        profile_email.Name = "profile_email"
+        profile_email.Size = New Size(73, 25)
+        profile_email.TabIndex = 5
+        profile_email.Text = "Label32"
+        ' 
+        ' profile_name
+        ' 
+        profile_name.AutoSize = True
+        profile_name.Location = New Point(57, 127)
+        profile_name.Name = "profile_name"
+        profile_name.Size = New Size(73, 25)
+        profile_name.TabIndex = 4
+        profile_name.Text = "Label32"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Location = New Point(55, 114)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(0, 25)
+        Label2.TabIndex = 3
         ' 
         ' profile_gopage
         ' 
@@ -1011,11 +1055,11 @@ Partial Class Dashboard
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI Black", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(325, 0)
+        Label6.Location = New Point(320, 20)
         Label6.Name = "Label6"
-        Label6.Size = New Size(188, 65)
+        Label6.Size = New Size(224, 65)
         Label6.TabIndex = 1
-        Label6.Text = "Profile"
+        Label6.Text = "PROFILE"
         ' 
         ' Materi_Container
         ' 
@@ -1601,21 +1645,21 @@ Partial Class Dashboard
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1088, 744)
+        Controls.Add(Profile_Container)
+        Controls.Add(Content_Display)
         Controls.Add(container_soal)
         Controls.Add(Latihan_Container)
-        Controls.Add(Profile_Container)
         Controls.Add(materi_container_isi)
         Controls.Add(Materi_Container)
         Controls.Add(Database_Container)
         Controls.Add(Login_Container)
         Controls.Add(Daftar_Container)
         Controls.Add(Murid_Container)
-        Controls.Add(Content_Display)
         Controls.Add(Panel1)
         FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Dashboard"
-        StartPosition = FormStartPosition.CenterParent
+        StartPosition = FormStartPosition.CenterScreen
         Text = "MePa"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
@@ -1636,8 +1680,6 @@ Partial Class Dashboard
         Murid.PerformLayout()
         Database_Container.ResumeLayout(False)
         Database_Container.PerformLayout()
-        Content_Display.ResumeLayout(False)
-        Content_Display.PerformLayout()
         Login_Container.ResumeLayout(False)
         Login_Container.PerformLayout()
         Daftar_Container.ResumeLayout(False)
@@ -1708,7 +1750,6 @@ Partial Class Dashboard
     Friend WithEvents Text_Server As TextBox
     Friend WithEvents Content_Display As Panel
     Friend WithEvents TextBox_Data As TextBox
-    Friend WithEvents Label2 As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Database_Icon As Panel
     Friend WithEvents Login_Container As Panel
@@ -1802,4 +1843,9 @@ Partial Class Dashboard
     Friend WithEvents Label30 As Label
     Friend WithEvents soal_jawaban As ComboBox
     Friend WithEvents soal_list As ComboBox
+    Friend WithEvents profile_name As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents profile_roles As Label
+    Friend WithEvents profile_email As Label
+    Friend WithEvents Logout As Button
 End Class

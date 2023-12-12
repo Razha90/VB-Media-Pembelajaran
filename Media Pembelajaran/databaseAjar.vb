@@ -104,28 +104,30 @@ Public Class databaseAjar
         End Using
     End Function
 
-    Public Function GetLatihanTitles() As List(Of String)
-        Dim titles As New List(Of String)
+    Public Function GetLatihanData() As List(Of Latihan)
+        Dim latihanList As New List(Of Latihan)
 
         Try
-            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
-            conn.Open()
+            Using conn As New MySqlConnection($"server={Server};port={Port};database={Database};userid={UserId};password={Password}")
+                conn.Open()
 
-            Dim query As String = "SELECT judul FROM latihan"
-            Using command As New MySqlCommand(query, conn)
-                Using reader As MySqlDataReader = command.ExecuteReader()
-                    While reader.Read()
-                        titles.Add(reader("judul").ToString())
-                    End While
+                Dim query As String = "SELECT * FROM latihan"
+                Using command As New MySqlCommand(query, conn)
+                    Using reader As MySqlDataReader = command.ExecuteReader()
+                        While reader.Read()
+                            Dim latihan As New Latihan()
+                            latihan.Id = Convert.ToInt32(reader("id_latihan"))
+                            latihan.Judul = reader("judul").ToString()
+                            latihanList.Add(latihan)
+                        End While
+                    End Using
                 End Using
             End Using
         Catch ex As Exception
             Console.WriteLine($"Error: {ex.Message}")
-        Finally
-            conn.Close()
         End Try
 
-        Return titles
+        Return latihanList
     End Function
 
 
@@ -156,40 +158,19 @@ Public Class databaseAjar
 
 
 
-    Public Function GetLatihanIdByTitle(judul As String) As Integer
-        Dim idLatihan As Integer = -1
-
-        ' Kode untuk melakukan query ke database dan mendapatkan ID latihan
-        ' Gantilah bagian ini sesuai dengan struktur database Anda
-        conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
-        Dim query As String = "SELECT id_latihan FROM latihan WHERE judul = @judul"
-        Using command As New MySqlCommand(query, conn)
-            command.Parameters.AddWithValue("@judul", judul)
-            conn.Open()
-
-            Dim result As Object = command.ExecuteScalar()
-            If result IsNot Nothing AndAlso Not IsDBNull(result) Then
-                idLatihan = Convert.ToInt32(result)
-            End If
-        End Using
-
-        Return idLatihan
-    End Function
-
     Public Function GetSoalData(idLatihan As Integer) As List(Of Soal)
         Dim soals As New List(Of Soal)()
+        Using conn As New MySqlConnection($"server={Server};port={Port};database={Database};userid={UserId};password={Password}")
+            Try
+                conn.Open()
 
-        Try
-            conn.ConnectionString = $"server={Server};port={Port};database={Database};userid={UserId};password={Password}"
-            conn.Open()
+                Dim query As String = "SELECT * FROM soal WHERE id_latihan = @idLatihan"
+                Using command As New MySqlCommand(query, conn)
+                    command.Parameters.AddWithValue("@idLatihan", idLatihan)
 
-            Dim query As String = "SELECT * FROM soal WHERE id_latihan = @idLatihan"
-            Using command As New MySqlCommand(query, conn)
-                command.Parameters.AddWithValue("@idLatihan", idLatihan)
-
-                Using reader As MySqlDataReader = command.ExecuteReader()
-                    While reader.Read()
-                        Dim soal As New Soal() With {
+                    Using reader As MySqlDataReader = command.ExecuteReader()
+                        While reader.Read()
+                            Dim soal As New Soal() With {
                         .IdSoal = Convert.ToInt32(reader("id_soal")),
                         .Pertanyaan = reader("pertanyaan").ToString(),
                         .Pilihan1 = reader("pilihan_1").ToString(),
@@ -198,18 +179,20 @@ Public Class databaseAjar
                         .Pilihan4 = reader("pilihan_4").ToString(),
                         .Jawaban = reader("jawaban").ToString()
                     }
-                        soals.Add(soal)
-                    End While
+                            soals.Add(soal)
+                        End While
+                    End Using
                 End Using
-            End Using
-        Catch ex As Exception
-            Console.WriteLine($"Error: {ex.Message}")
-        Finally
-            conn.Close()
-        End Try
+            Catch ex As Exception
+                Console.WriteLine($"Error: {ex.Message}")
+            Finally
+                conn.Close()
+            End Try
+        End Using
 
         Return soals
     End Function
+
 
 
 End Class
@@ -232,5 +215,10 @@ Public Class Soal
     Public Property Pilihan3 As String
     Public Property Pilihan4 As String
     Public Property Jawaban As String
-    Public Property IdLatihan As Integer
+    Public Property JawabanUser As String
+End Class
+
+Public Class Latihan
+    Public Property Judul As String
+    Public Property Id As Integer
 End Class

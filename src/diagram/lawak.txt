@@ -1,0 +1,8 @@
+        Dim juduls As List(Of String) = connector.GetLatihanTitles()
+
+        For Each judul In juduls
+            Dim button As New Button()
+            button.Text = judul
+            AddHandler button.Click, AddressOf Button_Click
+            FlowLayoutPanel1.Controls.Add(button)
+        Next

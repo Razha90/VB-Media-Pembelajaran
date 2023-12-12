@@ -1,6 +1,7 @@
 ﻿Imports Newtonsoft.Json
 Imports MySql.Data.MySqlClient
 Imports System.Resources
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Button
 
 Public Class Home
     Dim conn As New MySqlConnection
@@ -11,8 +12,10 @@ Public Class Home
     Private isiMateriList As New List(Of IsiMateri)
     Dim idMatkul As Integer
 
+    Private soals As New List(Of Soal)
+
     Private currentSoalIndex As Integer = 0
-    Private soals As List(Of Soal)
+    Dim skor As Integer = 0
 
     Sub CenterGroup()
         BackPanel.Width = Me.Width / 1.45
@@ -41,6 +44,16 @@ Public Class Home
         ElseIf val = 2 Then
             belajar_default.Visible = False
             belajar_layout.Visible = True
+        End If
+    End Sub
+
+    Sub latihanPos(val As Integer)
+        latihan_kanan.Visible = False
+        latihan_pilih.Visible = False
+        If val = 1 Then
+            latihan_pilih.Visible = True
+        ElseIf val = 2 Then
+            latihan_kanan.Visible = True
         End If
     End Sub
 
@@ -114,7 +127,8 @@ Public Class Home
         belajar_previous.Left = belajar_layout.Left / 5
         belajar_previous.Top = (belajar_layout.Height - belajar_previous.Width) / 2
 
-        belajar_isi.BackColor = Color.Pink
+        belajar_isi.BackColor = Color.LightBlue
+
         belajar_isi.Height = belajar_layout.Height - 50
         belajar_isi.Top = 25
         belajar_isi.Width = belajar_layout.Width - 170
@@ -124,6 +138,8 @@ Public Class Home
         belajar_text.Height = belajar_isi.Height - 80
         belajar_text.Top = belajar_isi.Top + 40
         belajar_text.Left = belajar_isi.Left - 90
+        belajar_text.Font = New Font(belajar_text.Font.FontFamily, 20)
+        belajar_text.ReadOnly = True
 
         belajar_subJudul.Left = (belajar_isi.Left + belajar_isi.Width - belajar_subJudul.Width) / 2 + 10
         belajar_subJudul.Top = belajar_isi.Top + 10
@@ -138,59 +154,6 @@ Public Class Home
 
     Private Sub menu_keluar_Click(sender As Object, e As EventArgs) Handles menu_keluar.Click
         Me.Close()
-    End Sub
-
-    Private Sub menu_latihan_Click(sender As Object, e As EventArgs) Handles menu_latihan.Click
-        PanelClick(2)
-        FlowLayoutPanel1.Controls.Clear()
-        Dim juduls As List(Of String) = connector.GetLatihanTitles()
-
-        For Each judul In juduls
-            Dim button As New Button()
-            button.Text = judul
-            AddHandler button.Click, AddressOf Button_Click
-            FlowLayoutPanel1.Controls.Add(button)
-        Next
-    End Sub
-
-    Private Sub Button_Click(sender As Object, e As EventArgs)
-        Dim judul As String = DirectCast(sender, Button).Text
-
-        ' Mendapatkan ID latihan berdasarkan judul
-        Dim idLatihan As Integer = connector.GetLatihanIdByJudul(judul)
-
-        If idLatihan > 0 Then
-            Dim soals As List(Of Soal) = connector.GetSoalData(idLatihan)
-            ShowSoalOnMainForm(currentSoalIndex)
-        Else
-            MessageBox.Show("Latihan tidak ditemukan.")
-        End If
-    End Sub
-
-    Private Sub ShowSoalOnMainForm(index)
-        If index >= 0 AndAlso index < soals.Count Then
-            Dim currentSlide As Soal = soals(index)
-
-            lblPertanyaan.Text = currentSlide.Pertanyaan
-            ' Aktifkan atau nonaktifkan tombol Previous dan Next sesuai dengan kondisi
-            'belajar_previous.Enabled = index > 0
-            'belajar_next.Enabled = index < isiMateriList.Count
-        End If
-    End Sub
-
-    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-        ' Navigasi ke soal berikutnya
-        currentSoalIndex += 1
-        ' Tampilkan soal yang baru
-        ShowSoalOnMainForm(currentSoalIndex)
-    End Sub
-
-
-    Private Sub btnPrevious_Click(sender As Object, e As EventArgs) Handles btnPrevious.Click
-        ' Navigasi ke soal sebelumnya
-        currentSoalIndex -= 1
-        ' Tampilkan soal yang baru
-        ShowSoalOnMainForm(currentSoalIndex)
     End Sub
 
     Private Sub materiAkses(val As Integer)
@@ -245,8 +208,121 @@ Public Class Home
         LayoutBelajar()
     End Sub
 
+    Private Sub menu_latihan_Click(sender As Object, e As EventArgs) Handles menu_latihan.Click
+        currentSoalIndex = 0
+        Try
+            latihan_flow.Controls.Clear()
+
+            Dim latihanList As List(Of Latihan) = connector.GetLatihanData()
+
+            If latihanList.Count > 0 Then
+                Dim buttonWidth As Integer = latihan_flow.ClientSize.Width
+                Dim buttonHeight As Integer = 40
+
+                For Each latih As Latihan In latihanList
+                    Dim materiButton As New Button()
+                    materiButton.Text = latih.Judul
+                    materiButton.Width = buttonWidth
+                    materiButton.Height = buttonHeight
+
+                    AddHandler materiButton.Click, Sub(senderBtn As Object, eBtn As EventArgs)
+                                                       dapatkanLatihan(latih.Id)
+                                                   End Sub
+
+                    latihan_flow.Controls.Add(materiButton)
+
+                Next
+            Else
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"Terjadi kesalahan: {ex.Message}")
+        Finally
+            latihanLayout()
+            latihanPos(1)
+            PanelClick(2)
+        End Try
+    End Sub
+
+
+
+    Private Sub dapatkanLatihan(val As Integer)
+        skor = 0
+        latihanPos(2)
+        soals = connector.GetSoalData(val)
+        currentSoalIndex = 0
+        TampilkanSoal(currentSoalIndex)
+    End Sub
+
+
+    Private Sub TampilkanSoal(index As Integer)
+        If index >= 0 AndAlso index < soals.Count Then
+            Dim currentSoal As Soal = soals(index)
+
+            latihan_soal.Text = currentSoal.Pertanyaan
+
+            latihan_1.Text = currentSoal.Pilihan1
+            latihan_2.Text = currentSoal.Pilihan2
+            latihan_3.Text = currentSoal.Pilihan3
+            latihan_4.Text = currentSoal.Pilihan4
+
+            latihan_1.Checked = False
+            latihan_2.Checked = False
+            latihan_3.Checked = False
+            latihan_4.Checked = False
+        Else
+            MessageBox.Show($"Selamat! Anda telah menyelesaikan semua soal dengan Skor = {(skor / soals.Count) * 100}.")
+            latihanPos(1)
+        End If
+        latihanLayout()
+    End Sub
+
+    Private Sub latihanLayout()
+        latihan_pertanyaan.Left = (Me.ClientSize.Width - latihan_pertanyaan.Width - 300) / 2
+        latihan_pertanyaan.Top = (latihan_kanan.Height - latihan_pertanyaan.Height) / 2
+
+        latihan_next.Top = (latihan_kanan.Height - latihan_next.Height) / 2
+        latihan_next.Left = latihan_kanan.Width - 100
+
+        latihan_soal.Left = (Me.ClientSize.Width - latihan_pertanyaan.Width - 300) / 2
+        latihan_soal.Top = latihan_pertanyaan.Top - 100
+
+        latihan_next.Visible = True
+
+        If currentSoalIndex = 0 Then
+        ElseIf currentSoalIndex = soals.Count Then
+            latihan_next.Visible = False
+        End If
+    End Sub
+
     Private Sub latihan_keluar_Click(sender As Object, e As EventArgs) Handles latihan_keluar.Click
         PanelClick(3)
+    End Sub
+
+    Private Sub latihan_next_Click(sender As Object, e As EventArgs) Handles latihan_next.Click
+        If latihan_1.Checked Or latihan_2.Checked Or latihan_3.Checked Or latihan_4.Checked Then
+            SimpanJawaban(currentSoalIndex)
+            currentSoalIndex += 1
+            TampilkanSoal(currentSoalIndex)
+            latihanLayout()
+        End If
+
+    End Sub
+
+    Private Sub SimpanJawaban(index As Integer)
+        Dim currentSoal As Soal = soals(index)
+        If currentSoal.Jawaban = "pilihan_1" And latihan_1.Checked Then
+            skor += 1
+        ElseIf currentSoal.Jawaban = "pilihan_2" And latihan_2.Checked Then
+            skor += 1
+
+
+        ElseIf currentSoal.Jawaban = "pilihan_3" And latihan_3.Checked Then
+            skor += 1
+
+
+        ElseIf currentSoal.Jawaban = "pilihan_4" And latihan_4.Checked Then
+            skor += 1
+        End If
     End Sub
 
 End Class

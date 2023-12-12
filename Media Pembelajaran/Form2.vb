@@ -540,10 +540,26 @@ Public Class Dashboard
             PositionPage = 0
             ActivePage(0)
             PannelPosition(0)
-            PositionMenu(4)
+            profile_name.Text = $"Nama : {Save_Profile(1)}"
+            profile_email.Text = $"Email : {Save_Profile(3)}"
+            profile_roles.Text = $"Kamu adalah {Save_Profile(5)}"
+
+            If Save_Profile(5) = "Murid" Then
+                PositionMenu(3)
+            Else
+                PositionMenu(4)
+
+            End If
         Else
             MessageBox.Show("Login Gagal. Username atau Email dan password salah.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+    End Sub
+
+    Private Sub Logout_Click(sender As Object, e As EventArgs) Handles Logout.Click
+        PositionMenu(2)
+        Array.Clear(Save_Profile, 0, Save_Profile.Length)
+        ActivePage(0)
+        PannelPosition(0)
     End Sub
 
     Sub GetMateri()
@@ -804,7 +820,7 @@ Public Class Dashboard
         Not String.IsNullOrWhiteSpace(soal_d.Text) Then
             Dim val As Integer = Connector.GetSelectedLatihanID(soal_list.Text)
 
-            If Connector.InsertNewSoal(soal_soal.Text, soal_a.Text, soal_b.Text, soal_c.Text, soal_d.Text, soal_jawaban.Text, Val) Then
+            If Connector.InsertNewSoal(soal_soal.Text, soal_a.Text, soal_b.Text, soal_c.Text, soal_d.Text, soal_jawaban.Text, val) Then
                 refresh_Latihan()
             Else
                 MessageBox.Show("Gagal Memasukkan Data")
@@ -865,4 +881,5 @@ Public Class Dashboard
             MessageBox.Show("Pilih soal yang akan diperbarui.")
         End If
     End Sub
+
 End Class
